@@ -1,0 +1,129 @@
+﻿@model ProRecruit.Job
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePublished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateApplyBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateApplyBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryRange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryRange)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FunctionalArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FunctionalArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobShift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReqYearsOfExp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReqYearsOfExp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeRequirement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeRequirement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organization.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobQualification.DegreeLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobQualification.DegreeLevel)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

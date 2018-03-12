@@ -1,0 +1,119 @@
+﻿@model IEnumerable<ProRecruit.CandidateQualification>
+
+@{
+    ViewBag.Title = "QualificationMulitpleView";
+}
+
+<h2>Your Qualifications</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Institute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCompleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DegreeLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DegreeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degreetitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MajorSubjects)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Institution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGPA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YourGPA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qualification.QualificationName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degreetitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MajorSubjects)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalGPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YourGPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

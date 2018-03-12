@@ -1,0 +1,121 @@
+﻿@model ProRecruit.Organization
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Organization</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Industry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Industry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phonenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfEmployee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfEmployee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperatingSince)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperatingSince)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockSymbol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockSymbol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyLogo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyLogo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostedJobs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostedJobs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

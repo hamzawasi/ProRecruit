@@ -1,0 +1,70 @@
+﻿@model ProRecruit.CandidateSkill
+@{
+    ViewBag.Title = "Candidate Skills";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Skills</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        <p>
+            @Html.ActionLink("Next Step", "CandidateExperience", "CV", null, new { @class = "btn btn-primary" })
+        </p>
+        <div id="multipleView"></div>
+        <h2>Add Your Skills:</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Skill.SkillName, "SkillName", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SkillId", null, htmlAttributes: new { name = "SkillId", @class = "form-control" })
+                @*@Html.DropDownList("SkillName",null,new { @class ="form control " })*@
+                @Html.ValidationMessageFor(model => model.Skill.SkillName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExperienceWithSkill, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExperienceWithSkill, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ExperienceWithSkill, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+
+                @*<p>
+                        @Html.ActionLink("Next Step", "CandidateCertifications", "CV", null, new { @class = "btn btn-primary" })
+                    </p>*@
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("SkillMulitpleView", "CV")", success:function (result)
+            {
+                $("#multipleView").html(result);
+            }
+        })
+    })
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

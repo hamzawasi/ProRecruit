@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,17 +169,96 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Candidate.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateCertification.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateExperience.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateJob.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateLanguage.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateProject.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateQualification.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CandidateSkill.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\CVController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Job.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobQualification.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobSkill.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Organization.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProRecruit_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProRecruit_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProRecruit_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProRecruit_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProRecruit_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Qualification.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Skill.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -186,8 +267,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ProRecruit_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProRecruit_Model.edmx</DependentUpon>
+      <LastGenOutput>ProRecruit_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProRecruit_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProRecruit_Model.edmx</DependentUpon>
+      <LastGenOutput>ProRecruit_Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="ProRecruit_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProRecruit_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ProRecruit_Model.edmx.diagram">
+      <DependentUpon>ProRecruit_Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -234,6 +332,36 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Candidates\Create.cshtml" />
+    <Content Include="Views\Candidates\Delete.cshtml" />
+    <Content Include="Views\Candidates\Details.cshtml" />
+    <Content Include="Views\Candidates\Edit.cshtml" />
+    <Content Include="Views\Candidates\Index.cshtml" />
+    <Content Include="Views\CV\Create.cshtml" />
+    <Content Include="Views\CV\Delete.cshtml" />
+    <Content Include="Views\CV\Details.cshtml" />
+    <Content Include="Views\CV\Edit.cshtml" />
+    <Content Include="Views\CV\Index.cshtml" />
+    <Content Include="Views\Organizations\Create.cshtml" />
+    <Content Include="Views\Organizations\Delete.cshtml" />
+    <Content Include="Views\Organizations\Details.cshtml" />
+    <Content Include="Views\Organizations\Edit.cshtml" />
+    <Content Include="Views\Organizations\Index.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Delete.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\CV\AddCandidateQualifications.cshtml" />
+    <Content Include="Views\CV\QualificationMulitpleView.cshtml" />
+    <Content Include="Views\CV\AddCandidateCertifications.cshtml" />
+    <Content Include="Views\CV\CertificationsMultipleView.cshtml" />
+    <Content Include="Views\CV\AddCandidateSkills.cshtml" />
+    <Content Include="Views\CV\SkillMulitpleView.cshtml" />
+    <Content Include="Views\CV\AddCandidateLanguage.cshtml" />
+    <Content Include="Views\CV\LanguageMultipleView.cshtml" />
+    <Content Include="Views\CV\AddCandidateExperience.cshtml" />
+    <Content Include="Views\CV\ExperienceMultipleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +373,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

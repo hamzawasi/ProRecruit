@@ -1,0 +1,1564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProRecruit_FinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="30" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="30" />
+          <Property Name="City" Type="nvarchar" MaxLength="30" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CurrentAddress" Type="nvarchar(max)" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="30" />
+          <Property Name="Experience" Type="nvarchar" MaxLength="30" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Industry" Type="nvarchar" MaxLength="30" />
+          <Property Name="FunctionalArea" Type="nvarchar" MaxLength="30" />
+          <Property Name="CurrentSalary" Type="nvarchar" MaxLength="30" />
+          <Property Name="ExpectedSalary" Type="nvarchar" MaxLength="30" />
+          <Property Name="CarreerLevel" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CandidateCertifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CertificationTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="CertificationDescription" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PositionHeld" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" />
+          <Property Name="DateApplied" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateLanguages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProficiencyWithLanguage" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateProjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProjectDescription" Type="nvarchar(max)" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateQualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QualificationId" Type="int" Nullable="false" />
+          <Property Name="Institute" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime" />
+          <Property Name="DegreeLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="DegreeType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Degreetitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="MajorSubjects" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Institution" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompletionYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResultType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalGPA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalGrade" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPercentage" Type="nvarchar" MaxLength="50" />
+          <Property Name="YourGPA" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CandidateSkills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="ExperienceWithSkill" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="DatePublished" Type="datetime" />
+          <Property Name="DateApplyBy" Type="datetime" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobDescription" Type="nvarchar(max)" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalaryRange" Type="nvarchar" MaxLength="30" />
+          <Property Name="FunctionalArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobShift" Type="nvarchar" MaxLength="20" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="ReqYearsOfExp" Type="nvarchar" MaxLength="30" />
+          <Property Name="AgeRequirement" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobQualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="QualificationId" Type="int" />
+          <Property Name="DegreeLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="DegreeType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DegreeTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="MajorSubject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Institution" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompletionYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResultType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalGPA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPercentage" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalGrade" Type="nvarchar" MaxLength="50" />
+          <Property Name="YourGPA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobSkills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="SkillId" Type="int" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="Industry" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phonenumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoOfEmployee" Type="nvarchar" MaxLength="50" />
+          <Property Name="OperatingSince" Type="nvarchar" MaxLength="50" />
+          <Property Name="StockSymbol" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyLogo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostedJobs" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QualificationName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="CandidateSkills_SkillId_FK">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateCertifications_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateCertifications" Type="Self.CandidateCertifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateCertifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateExperience_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateExperience" Type="Self.CandidateExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateExperience">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateJob_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateJob" Type="Self.CandidateJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateJob">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateJob_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="CandidateJob" Type="Self.CandidateJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateJob">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateLanguages_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateLanguages" Type="Self.CandidateLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateLanguages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateProjects_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateProjects" Type="Self.CandidateProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateProjects">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="QualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateSkills_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Organization1">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobQualification_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="QualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSkills_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobSkills" Type="Self.JobSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSkills_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="0..1" />
+          <End Role="JobSkills" Type="Self.JobSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProRecruit_FinalModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateCertifications" EntityType="Self.CandidateCertifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateExperience" EntityType="Self.CandidateExperience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateJob" EntityType="Self.CandidateJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateLanguages" EntityType="Self.CandidateLanguages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobQualification" EntityType="Self.JobQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobSkills" EntityType="Self.JobSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_AspNetUsers" Association="Self.FK_Candidate_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateCertifications_Candidate" Association="Self.FK_CandidateCertifications_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateCertifications" EntitySet="CandidateCertifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateExperience_Candidate" Association="Self.FK_CandidateExperience_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateExperience" EntitySet="CandidateExperience" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateJob_Candidate" Association="Self.FK_CandidateJob_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateJob" EntitySet="CandidateJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateJob_Job" Association="Self.FK_CandidateJob_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="CandidateJob" EntitySet="CandidateJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateLanguages_Candidate" Association="Self.FK_CandidateLanguages_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateLanguages" EntitySet="CandidateLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateProjects_Candidate" Association="Self.FK_CandidateProjects_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateProjects" EntitySet="CandidateProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_Candidate" Association="Self.FK_CandidateQualification_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_Qualification" Association="Self.FK_CandidateQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateSkills_Candidate" Association="Self.FK_CandidateSkills_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Organization1" Association="Self.FK_Job_Organization1">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Job" Association="Self.FK_JobQualification_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobQualification" EntitySet="JobQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Qualification" Association="Self.FK_JobQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="JobQualification" EntitySet="JobQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_Job" Association="Self.FK_JobSkills_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_AspNetUsers" Association="Self.FK_Organization_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProRecruit_FinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="AspNetUsers" ToRole="Candidate" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_Organization_AspNetUsers" FromRole="AspNetUsers" ToRole="Organization" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Qualification" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Industry" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FunctionalArea" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentSalary" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedSalary" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CarreerLevel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="Candidate" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CandidateCertifications" Relationship="Self.FK_CandidateCertifications_Candidate" FromRole="Candidate" ToRole="CandidateCertifications" />
+          <NavigationProperty Name="CandidateExperiences" Relationship="Self.FK_CandidateExperience_Candidate" FromRole="Candidate" ToRole="CandidateExperience" />
+          <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Candidate" FromRole="Candidate" ToRole="CandidateJob" />
+          <NavigationProperty Name="CandidateLanguages" Relationship="Self.FK_CandidateLanguages_Candidate" FromRole="Candidate" ToRole="CandidateLanguages" />
+          <NavigationProperty Name="CandidateProjects" Relationship="Self.FK_CandidateProjects_Candidate" FromRole="Candidate" ToRole="CandidateProjects" />
+          <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="Candidate" ToRole="CandidateQualification" />
+          <NavigationProperty Name="CandidateSkills" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="Candidate" ToRole="CandidateSkills" />
+        </EntityType>
+        <EntityType Name="CandidateCertification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CertificationTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CertificationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateCertifications_Candidate" FromRole="CandidateCertifications" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="CandidateExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizationName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PositionHeld" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateExperience_Candidate" FromRole="CandidateExperience" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="CandidateJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="DateApplied" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateJob_Candidate" FromRole="CandidateJob" ToRole="Candidate" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_CandidateJob_Job" FromRole="CandidateJob" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="CandidateLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProficiencyWithLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateLanguages_Candidate" FromRole="CandidateLanguages" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="CandidateProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateProjects_Candidate" FromRole="CandidateProjects" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="CandidateQualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QualificationId" Type="Int32" Nullable="false" />
+          <Property Name="Institute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateCompleted" Type="DateTime" Precision="3" />
+          <Property Name="DegreeLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Degreetitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MajorSubjects" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Institution" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResultType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YourGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="CandidateQualification" ToRole="Candidate" />
+          <NavigationProperty Name="Qualification" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="CandidateQualification" ToRole="Qualification" />
+        </EntityType>
+        <EntityType Name="CandidateSkill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="ExperienceWithSkill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="CandidateSkills" ToRole="Candidate" />
+          <NavigationProperty Name="Skill" Relationship="Self.CandidateSkills_SkillId_FK" FromRole="CandidateSkills" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="DatePublished" Type="DateTime" Precision="3" />
+          <Property Name="DateApplyBy" Type="DateTime" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryRange" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FunctionalArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobShift" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ReqYearsOfExp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="AgeRequirement" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Job" FromRole="Job" ToRole="CandidateJob" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_Job_Organization1" FromRole="Job" ToRole="Organization" />
+          <NavigationProperty Name="JobQualification" Relationship="Self.FK_JobQualification_Job" FromRole="Job" ToRole="JobQualification" />
+          <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_Job" FromRole="Job" ToRole="JobSkills" />
+        </EntityType>
+        <EntityType Name="JobQualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="QualificationId" Type="Int32" />
+          <Property Name="DegreeLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MajorSubject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Institution" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResultType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YourGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_JobQualification_Job" FromRole="JobQualification" ToRole="Job" />
+          <NavigationProperty Name="Qualification" Relationship="Self.FK_JobQualification_Qualification" FromRole="JobQualification" ToRole="Qualification" />
+        </EntityType>
+        <EntityType Name="JobSkill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="SkillId" Type="Int32" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_JobSkills_Job" FromRole="JobSkills" ToRole="Job" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_JobSkills_Skill" FromRole="JobSkills" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Industry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfEmployee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperatingSince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StockSymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostedJobs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Organization_AspNetUsers" FromRole="Organization" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Organization1" FromRole="Organization" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QualificationName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="Qualification" ToRole="CandidateQualification" />
+          <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Qualification" FromRole="Qualification" ToRole="JobQualification" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CandidateSkills" Relationship="Self.CandidateSkills_SkillId_FK" FromRole="Skill" ToRole="CandidateSkills" />
+          <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_Skill" FromRole="Skill" ToRole="JobSkills" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateCertifications_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateCertifications" Type="Self.CandidateCertification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateCertifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateExperience_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateExperience" Type="Self.CandidateExperience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateExperience">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateJob_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateJob" Type="Self.CandidateJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateJob">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateLanguages_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateLanguages" Type="Self.CandidateLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateLanguages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateProjects_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateProjects" Type="Self.CandidateProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateProjects">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateSkills_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateJob_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="CandidateJob" Type="Self.CandidateJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateJob">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="QualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CandidateSkills_SkillId_FK">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Organization1">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobQualification_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSkills_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobSkills" Type="Self.JobSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="QualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSkills_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="0..1" />
+          <End Role="JobSkills" Type="Self.JobSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProRecruit_FinalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+          <EntitySet Name="CandidateCertifications" EntityType="Self.CandidateCertification" />
+          <EntitySet Name="CandidateExperiences" EntityType="Self.CandidateExperience" />
+          <EntitySet Name="CandidateJobs" EntityType="Self.CandidateJob" />
+          <EntitySet Name="CandidateLanguages" EntityType="Self.CandidateLanguage" />
+          <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProject" />
+          <EntitySet Name="CandidateQualifications" EntityType="Self.CandidateQualification" />
+          <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkill" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="JobQualifications" EntityType="Self.JobQualification" />
+          <EntitySet Name="JobSkills" EntityType="Self.JobSkill" />
+          <EntitySet Name="Organizations" EntityType="Self.Organization" />
+          <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_AspNetUsers" Association="Self.FK_Candidate_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Candidate" EntitySet="Candidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_AspNetUsers" Association="Self.FK_Organization_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Organization" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateCertifications_Candidate" Association="Self.FK_CandidateCertifications_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateCertifications" EntitySet="CandidateCertifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateExperience_Candidate" Association="Self.FK_CandidateExperience_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateExperience" EntitySet="CandidateExperiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateJob_Candidate" Association="Self.FK_CandidateJob_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateJob" EntitySet="CandidateJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateLanguages_Candidate" Association="Self.FK_CandidateLanguages_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateLanguages" EntitySet="CandidateLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateProjects_Candidate" Association="Self.FK_CandidateProjects_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateProjects" EntitySet="CandidateProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_Candidate" Association="Self.FK_CandidateQualification_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateSkills_Candidate" Association="Self.FK_CandidateSkills_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateJob_Job" Association="Self.FK_CandidateJob_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="CandidateJob" EntitySet="CandidateJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_Qualification" Association="Self.FK_CandidateQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Organization1" Association="Self.FK_Job_Organization1">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Job" Association="Self.FK_JobQualification_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="JobQualification" EntitySet="JobQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_Job" Association="Self.FK_JobSkills_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Qualification" Association="Self.FK_JobQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="JobQualification" EntitySet="JobQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProRecruit_FinalModelStoreContainer" CdmEntityContainer="ProRecruit_FinalEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="FunctionalArea" ColumnName="FunctionalArea" />
+                <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+                <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
+                <ScalarProperty Name="CarreerLevel" ColumnName="CarreerLevel" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateCertifications">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateCertification">
+              <MappingFragment StoreEntitySet="CandidateCertifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CertificationTitle" ColumnName="CertificationTitle" />
+                <ScalarProperty Name="CertificationDescription" ColumnName="CertificationDescription" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateExperiences">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateExperience">
+              <MappingFragment StoreEntitySet="CandidateExperience">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="PositionHeld" ColumnName="PositionHeld" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateJobs">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateJob">
+              <MappingFragment StoreEntitySet="CandidateJob">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="DateApplied" ColumnName="DateApplied" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateLanguages">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateLanguage">
+              <MappingFragment StoreEntitySet="CandidateLanguages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LanguageTitle" ColumnName="LanguageTitle" />
+                <ScalarProperty Name="ProficiencyWithLanguage" ColumnName="ProficiencyWithLanguage" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateProjects">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateProject">
+              <MappingFragment StoreEntitySet="CandidateProjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateQualifications">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateQualification">
+              <MappingFragment StoreEntitySet="CandidateQualification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="DegreeLevel" ColumnName="DegreeLevel" />
+                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
+                <ScalarProperty Name="Degreetitle" ColumnName="Degreetitle" />
+                <ScalarProperty Name="MajorSubjects" ColumnName="MajorSubjects" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Institution" ColumnName="Institution" />
+                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
+                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+                <ScalarProperty Name="TotalGPA" ColumnName="TotalGPA" />
+                <ScalarProperty Name="TotalGrade" ColumnName="TotalGrade" />
+                <ScalarProperty Name="TotalPercentage" ColumnName="TotalPercentage" />
+                <ScalarProperty Name="YourGPA" ColumnName="YourGPA" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateSkills">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateSkill">
+              <MappingFragment StoreEntitySet="CandidateSkills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="ExperienceWithSkill" ColumnName="ExperienceWithSkill" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="DatePublished" ColumnName="DatePublished" />
+                <ScalarProperty Name="DateApplyBy" ColumnName="DateApplyBy" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="SalaryRange" ColumnName="SalaryRange" />
+                <ScalarProperty Name="FunctionalArea" ColumnName="FunctionalArea" />
+                <ScalarProperty Name="JobShift" ColumnName="JobShift" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ReqYearsOfExp" ColumnName="ReqYearsOfExp" />
+                <ScalarProperty Name="AgeRequirement" ColumnName="AgeRequirement" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobQualifications">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.JobQualification">
+              <MappingFragment StoreEntitySet="JobQualification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+                <ScalarProperty Name="DegreeLevel" ColumnName="DegreeLevel" />
+                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
+                <ScalarProperty Name="DegreeTitle" ColumnName="DegreeTitle" />
+                <ScalarProperty Name="MajorSubject" ColumnName="MajorSubject" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Institution" ColumnName="Institution" />
+                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
+                <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+                <ScalarProperty Name="TotalGPA" ColumnName="TotalGPA" />
+                <ScalarProperty Name="TotalPercentage" ColumnName="TotalPercentage" />
+                <ScalarProperty Name="TotalGrade" ColumnName="TotalGrade" />
+                <ScalarProperty Name="YourGPA" ColumnName="YourGPA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSkills">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.JobSkill">
+              <MappingFragment StoreEntitySet="JobSkills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="NoOfEmployee" ColumnName="NoOfEmployee" />
+                <ScalarProperty Name="OperatingSince" ColumnName="OperatingSince" />
+                <ScalarProperty Name="StockSymbol" ColumnName="StockSymbol" />
+                <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
+                <ScalarProperty Name="PostedJobs" ColumnName="PostedJobs" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualifications">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Qualification">
+              <MappingFragment StoreEntitySet="Qualification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProRecruit_FinalModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ProRecruit_FinalModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
