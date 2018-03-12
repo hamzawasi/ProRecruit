@@ -362,6 +362,8 @@
     <Content Include="Views\CV\LanguageMultipleView.cshtml" />
     <Content Include="Views\CV\AddCandidateExperience.cshtml" />
     <Content Include="Views\CV\ExperienceMultipleView.cshtml" />
+    <Content Include="Views\Organizations\Dashboard.cshtml" />
+    <Content Include="Views\Candidates\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

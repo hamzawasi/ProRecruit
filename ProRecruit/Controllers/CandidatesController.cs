@@ -22,6 +22,11 @@ namespace ProRecruit.Controllers
             return View(candidates.ToList());
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
         // GET: Candidates/Details/5
         public ActionResult Details(string id)
         {
@@ -52,9 +57,12 @@ namespace ProRecruit.Controllers
         public ActionResult Create(Candidate candidate)
         {
             AspNetUser user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            //var aspuser = db.AspNetUsers.Find(User.Identity.GetUserId());
 
             if (ModelState.IsValid)
             {
+                user.Type = "Candidate";
+                db.Entry(user).State = EntityState.Modified;
                 candidate.Email = user.Email;
                 candidate.UserId = User.Identity.GetUserId();
                 db.Candidates.Add(candidate);

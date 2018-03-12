@@ -37,8 +37,6 @@ namespace ProRecruit
         public string CNIC { get; set; }
         public string CurrentAddress { get; set; }
         public string Contact { get; set; }
-        public string Experience { get; set; }
-        public string Qualification { get; set; }
         public string Industry { get; set; }
         public string FunctionalArea { get; set; }
         public string CurrentSalary { get; set; }

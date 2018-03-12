@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProRecruit;
+using Microsoft.AspNet.Identity;
 
 namespace ProRecruit.Controllers
 {
@@ -19,6 +20,11 @@ namespace ProRecruit.Controllers
         {
             var organizations = db.Organizations.Include(o => o.AspNetUser);
             return View(organizations.ToList());
+        }
+
+        public ActionResult Dashboard()
+        {
+            return View();
         }
 
         // GET: Organizations/Details/5
@@ -39,7 +45,7 @@ namespace ProRecruit.Controllers
         // GET: Organizations/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+            //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -48,16 +54,23 @@ namespace ProRecruit.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,Name,Industry,ContactPerson,Phonenumber,Fax,NoOfEmployee,OperatingSince,StockSymbol,CompanyLogo,PostedJobs,Email")] Organization organization)
+        public ActionResult Create(Organization organization)
         {
+            AspNetUser user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            var aspuser = db.AspNetUsers.Find(User.Identity.GetUserId());
+
             if (ModelState.IsValid)
             {
+                aspuser.Type = "Organization";
+                db.Entry(aspuser).State = EntityState.Modified;
+                organization.Email = user.Email;
+                organization.UserId = User.Identity.GetUserId();
                 db.Organizations.Add(organization);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", organization.UserId);
+            //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", organization.UserId);
             return View(organization);
         }
 

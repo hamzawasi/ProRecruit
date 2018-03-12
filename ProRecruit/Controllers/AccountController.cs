@@ -17,6 +17,7 @@ namespace ProRecruit.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ProRecruit_FinalEntities db = new ProRecruit_FinalEntities();
 
         public AccountController()
         {
@@ -79,7 +80,11 @@ namespace ProRecruit.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    string userId = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity.GetUserId();
+                    AspNetUser user = db.AspNetUsers.Find(userId);
+                    string type = user.Type;
+                    return RedirectToLocal(returnUrl, type);
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -89,6 +94,32 @@ namespace ProRecruit.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl, string type)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            if (type == "Candidate")
+            {
+                return RedirectToAction("Dashboard", "Candidates");
+            }
+            if (type == "Organization")
+            {
+                return RedirectToAction("Dashboard", "Organizations");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -142,13 +173,22 @@ namespace ProRecruit.Controllers
             return View();
         }
 
+        //private string CheckRadioText(FormCollection form)
+        //{
+        //    string type = form["Type"].ToString();
+        //    return type;
+        //}
+
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, FormCollection form)
         {
+            //FormCollection form = new FormCollection();
+            string type = form["Type"].ToString();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -156,14 +196,22 @@ namespace ProRecruit.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Create", "Candidates");
+                    if (type == "Candidate")
+                    {
+                        return RedirectToAction("Create", "Candidates");
+                    }
+                    if(type == "Organization")
+                    {
+                        return RedirectToAction("Create", "Organizations");
+                    }
+                    
                 }
                 AddErrors(result);
             }
@@ -441,15 +489,6 @@ namespace ProRecruit.Controllers
             {
                 ModelState.AddModelError("", error);
             }
-        }
-
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
