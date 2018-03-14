@@ -88,6 +88,7 @@
           <Property Name="ExpectedSalary" Type="nvarchar" MaxLength="30" />
           <Property Name="CarreerLevel" Type="nvarchar" MaxLength="30" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CandidateCertifications">
           <Key>
@@ -722,6 +723,7 @@
           <NavigationProperty Name="CandidateProjects" Relationship="Self.FK_CandidateProjects_Candidate" FromRole="Candidate" ToRole="CandidateProjects" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="Candidate" ToRole="CandidateQualification" />
           <NavigationProperty Name="CandidateSkills" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="Candidate" ToRole="CandidateSkills" />
+          <Property Name="Summary" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CandidateCertification">
           <Key>
@@ -1321,6 +1323,7 @@
           <EntitySetMapping Name="Candidates">
             <EntityTypeMapping TypeName="ProRecruit_FinalModel.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

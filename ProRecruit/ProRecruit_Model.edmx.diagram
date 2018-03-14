@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae923d0ef6b7416b856bb4b54b382965" Name="Diagram1" ZoomLevel="79">
+      <Diagram DiagramId="ae923d0ef6b7416b856bb4b54b382965" Name="Diagram1" ZoomLevel="163">
         <EntityTypeShape EntityType="ProRecruit_FinalModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProRecruit_FinalModel.AspNetRole" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProRecruit_FinalModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />

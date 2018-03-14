@@ -7,7 +7,7 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="jumbotron">
     <h4>Candidate</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -100,22 +100,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Experience)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Experience)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Qualification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Qualification)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Industry)
         </dt>
 
@@ -156,16 +140,66 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.Summary)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
+            @Html.DisplayFor(model => model.Summary)
         </dd>
 
     </dl>
 </div>
+
+<div class="jumbotron" id="QualificationMulitpleView"></div>
+<br />
+<div class="jumbotron" id="CertificationsMultipleView"></div>
+<br />
+<div class="jumbotron" id="ExperienceMultipleView"></div>
+<br />
+<div class="jumbotron" id="SkillMulitpleView"></div>
+<br />
+<div class="jumbotron" id="LanguageMultipleView"></div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("CertificationsMultipleView", "CV")", success:function (result)
+            {
+                $("#CertificationsMultipleView").html(result);
+            }
+        })
+        $.ajax({
+            url: "@Url.Action("LanguageMultipleView", "CV")", success:function (result)
+            {
+                $("#LanguageMultipleView").html(result);
+            }
+        })
+        $.ajax({
+            url: "@Url.Action("QualificationMulitpleView", "CV")", success:function (result)
+            {
+                $("#QualificationMulitpleView").html(result);
+            }
+        })
+        $.ajax({
+            url: "@Url.Action("ExperienceMultipleView", "CV")", success:function (result)
+            {
+                $("#ExperienceMultipleView").html(result);
+            }
+        })
+        $.ajax({
+            url: "@Url.Action("SkillMulitpleView", "CV")", success:function (result)
+            {
+                $("#SkillMulitpleView").html(result);
+            }
+        })
+
+    })
+</script>

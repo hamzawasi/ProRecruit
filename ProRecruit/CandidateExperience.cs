@@ -11,13 +11,18 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CandidateExperience
     {
         public int Id { get; set; }
+        [Display(Name = "Organization / Company")]
         public string OrganizationName { get; set; }
+        [Display(Name = "Position Held")]
         public string PositionHeld { get; set; }
+        [Display(Name = "From")]
         public Nullable<System.DateTime> FromDate { get; set; }
+        [Display(Name = "To")]
         public Nullable<System.DateTime> ToDate { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

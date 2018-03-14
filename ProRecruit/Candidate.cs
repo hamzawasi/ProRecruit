@@ -11,6 +11,7 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Candidate
     {
@@ -25,24 +26,36 @@ namespace ProRecruit
             this.CandidateQualifications = new HashSet<CandidateQualification>();
             this.CandidateSkills = new HashSet<CandidateSkill>();
         }
-    
+
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Date Of Birth")]
         public System.DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
+        [Display(Name = "Marital Status")]
         public string MaritalStatus { get; set; }
         public string Nationality { get; set; }
         public string City { get; set; }
+        [Display(Name = "CNIC / SSN")]
         public string CNIC { get; set; }
+        [Display(Name = "Postal Address")]
         public string CurrentAddress { get; set; }
+        [Display(Name = "Contact Number")]
         public string Contact { get; set; }
         public string Industry { get; set; }
+        [Display(Name = "Functional Area")]
         public string FunctionalArea { get; set; }
+        [Display(Name = "Current Salary")]
         public string CurrentSalary { get; set; }
+        [Display(Name = "Expected Salary")]
         public string ExpectedSalary { get; set; }
+        [Display(Name = "Career Level")]
         public string CarreerLevel { get; set; }
         public string UserId { get; set; }
+        public string Summary { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

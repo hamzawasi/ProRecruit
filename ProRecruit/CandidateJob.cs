@@ -11,11 +11,14 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CandidateJob
     {
         public int Id { get; set; }
+        [Display(Name = "Job Name")]
         public Nullable<int> JobId { get; set; }
+        [Display(Name = "Date Applied")]
         public Nullable<System.DateTime> DateApplied { get; set; }
         public string UserId { get; set; }
     

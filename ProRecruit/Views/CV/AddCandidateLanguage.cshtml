@@ -11,8 +11,10 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
         <hr />
+        <p>
+            @Html.ActionLink("Your Profile Is Complete, Click Here To Continue", "Dashboard", "Candidates", null, new { @class = "btn btn-primary" })
+        </p>
         <div id="multipleView"></div>
         <h2>Add Your Languages:</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -46,9 +48,9 @@
             </div>
         </div>
 
-        <p>
+        @*<p>
             @Html.ActionLink("Now you are done! Click here to continue", "Index", "Home", null, new { @class = "btn btn-primary" })
-        </p>
+        </p>*@
     </div>
 }
 
