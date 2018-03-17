@@ -24,7 +24,8 @@ namespace ProRecruit.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            var organization = db.Organizations.Find(User.Identity.GetUserId());
+            return View(organization);
         }
 
         // GET: Organizations/Details/5
@@ -67,7 +68,7 @@ namespace ProRecruit.Controllers
                 organization.UserId = User.Identity.GetUserId();
                 db.Organizations.Add(organization);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Dashboard");
             }
 
             //ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", organization.UserId);

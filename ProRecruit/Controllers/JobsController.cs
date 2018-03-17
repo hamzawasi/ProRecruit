@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProRecruit;
+using Microsoft.AspNet.Identity;
 
 namespace ProRecruit.Controllers
 {
@@ -19,6 +20,15 @@ namespace ProRecruit.Controllers
         {
             var jobs = db.Jobs.Include(j => j.Organization).Include(j => j.JobQualification);
             return View(jobs.ToList());
+        }
+
+        public ActionResult ViewJobsPosted()
+        {
+            string userid = User.Identity.GetUserId();
+            var jobsPosted = (from jp in db.Jobs
+                                   where jp.UserId.Equals(userid)
+                                   select jp);
+            return View(jobsPosted);
         }
 
         // GET: Jobs/Details/5
@@ -39,8 +49,8 @@ namespace ProRecruit.Controllers
         // GET: Jobs/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name");
-            ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel");
+            //ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name");
+            //ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel");
             return View();
         }
 
@@ -49,17 +59,68 @@ namespace ProRecruit.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DatePublished,DateApplyBy,Title,JobDescription,Location,SalaryRange,FunctionalArea,JobShift,Gender,ReqYearsOfExp,AgeRequirement,UserId,Id")] Job job)
+        [Authorize]
+        public ActionResult Create(Job job)
         {
+            //AspNetUser user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            string userid = User.Identity.GetUserId();
+            job.UserId = userid;
+
             if (ModelState.IsValid)
             {
                 db.Jobs.Add(job);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Dashboard", "Organizations");
             }
 
-            ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name", job.UserId);
-            ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel", job.Id);
+            //ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name", job.UserId);
+            //ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel", job.Id);
+            return View(job);
+        }
+
+        [Authorize]
+        public ActionResult ViewJobsAppliedFor()
+        {
+            string userid = User.Identity.GetUserId();
+            var candidateJobsApplied = db.CandidateJobs.Where(c => c.UserId == userid).ToList();
+            return View(candidateJobsApplied);
+        }
+
+        public ActionResult ViewAllJobs()
+        {
+            var jobs = db.Jobs.ToList();
+            return View(jobs);
+        }
+
+        public ActionResult ApplyForJob(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            return View(job);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult ApplyForJob(Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                CandidateJob candidateJob = new CandidateJob();
+                candidateJob.DateApplied = DateTime.UtcNow;
+                candidateJob.JobId = job.Id;
+                candidateJob.UserId = User.Identity.GetUserId();
+                db.CandidateJobs.Add(candidateJob);
+                db.SaveChanges();
+                return RedirectToAction("Dashboard", "Candidates");
+            }
             return View(job);
         }
 
@@ -85,7 +146,7 @@ namespace ProRecruit.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DatePublished,DateApplyBy,Title,JobDescription,Location,SalaryRange,FunctionalArea,JobShift,Gender,ReqYearsOfExp,AgeRequirement,UserId,Id")] Job job)
+        public ActionResult Edit(Job job)
         {
             if (ModelState.IsValid)
             {

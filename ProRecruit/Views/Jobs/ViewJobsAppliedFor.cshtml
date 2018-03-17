@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ProRecruit.CandidateJob>
+@{
+    ViewBag.Title = "ViewJobsAppliedFor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Jobs Applied For</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.DatePublished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.DateApplyBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.SalaryRange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.FunctionalArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobShift)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.ReqYearsOfExp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.AgeRequirement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Organization.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobQualification.DegreeLevel)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.DatePublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.DateApplyBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.SalaryRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.FunctionalArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.JobShift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.ReqYearsOfExp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.AgeRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Organization.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.JobQualification.DegreeLevel)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

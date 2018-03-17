@@ -365,9 +365,14 @@
     <Content Include="Views\Organizations\Dashboard.cshtml" />
     <Content Include="Views\Candidates\Dashboard.cshtml" />
     <Content Include="Views\Candidates\Summary.cshtml" />
+    <Content Include="Views\Jobs\ViewJobsPosted.cshtml" />
+    <Content Include="Views\Jobs\ViewAllJobs.cshtml" />
+    <Content Include="Views\Jobs\ApplyForJob.cshtml" />
+    <Content Include="Views\Jobs\ViewJobsAppliedFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
