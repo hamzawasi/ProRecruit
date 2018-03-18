@@ -18,6 +18,7 @@ namespace ProRecruit
         public Job()
         {
             this.CandidateJobs = new HashSet<CandidateJob>();
+            this.JobQualifications = new HashSet<JobQualification>();
             this.JobSkills = new HashSet<JobSkill>();
         }
     
@@ -39,6 +40,8 @@ namespace ProRecruit
         public virtual ICollection<CandidateJob> CandidateJobs { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual JobQualification JobQualification { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JobQualification> JobQualifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobSkill> JobSkills { get; set; }
     }

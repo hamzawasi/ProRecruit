@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProRecruit.CandidateJob>
+@{
+    ViewBag.Title = "ViewCandidatesApplied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Candidates Applied</h2>
+
+<table class="table-hover">
+        <tr>
+            <th>Candidate Name</th>
+        </tr>
+        <tr>
+            <th>Career Level</th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @(item.Candidate.FirstName + item.Candidate.LastName)
+            </td>
+            <td>
+                @item.Candidate.CarreerLevel
+            </td>
+        </tr>
+    }
+        
+</table>

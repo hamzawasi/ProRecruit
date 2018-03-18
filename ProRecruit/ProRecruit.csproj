@@ -369,6 +369,11 @@
     <Content Include="Views\Jobs\ViewAllJobs.cshtml" />
     <Content Include="Views\Jobs\ApplyForJob.cshtml" />
     <Content Include="Views\Jobs\ViewJobsAppliedFor.cshtml" />
+    <Content Include="Views\Jobs\ViewCandidatesApplied.cshtml" />
+    <Content Include="Views\Jobs\AddJobQualifications.cshtml" />
+    <Content Include="Views\Jobs\QualificationMulitpleView.cshtml" />
+    <Content Include="Views\Jobs\AddJobSkills.cshtml" />
+    <Content Include="Views\Jobs\SkillMulitpleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

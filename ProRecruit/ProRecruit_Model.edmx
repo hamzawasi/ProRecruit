@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProRecruit_FinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProRecruit.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -242,7 +242,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QualificationName" Type="nvarchar" MaxLength="30" />
+          <Property Name="QualificationName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -461,15 +461,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobQualification_Job">
+        <Association Name="FK_JobQualification_Job1">
           <End Role="Job" Type="Self.Job" Multiplicity="1" />
-          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Job">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="JobQualification">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="JobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -521,7 +521,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProRecruit_FinalModelStoreContainer">
+        <EntityContainer Name="ProRecruitStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -607,7 +607,7 @@
             <End Role="Organization" EntitySet="Organization" />
             <End Role="Job" EntitySet="Job" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobQualification_Job" Association="Self.FK_JobQualification_Job">
+          <AssociationSet Name="FK_JobQualification_Job1" Association="Self.FK_JobQualification_Job1">
             <End Role="Job" EntitySet="Job" />
             <End Role="JobQualification" EntitySet="JobQualification" />
           </AssociationSet>
@@ -628,10 +628,11 @@
             <End Role="Organization" EntitySet="Organization" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ProRecruit_FinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ProRecruit" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -687,12 +688,12 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Candidate" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="AspNetUsers" ToRole="Candidate" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Organization_AspNetUsers" FromRole="AspNetUsers" ToRole="Organization" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -715,6 +716,7 @@
           <Property Name="ExpectedSalary" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CarreerLevel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="Candidate" ToRole="AspNetUsers" />
           <NavigationProperty Name="CandidateCertifications" Relationship="Self.FK_CandidateCertifications_Candidate" FromRole="Candidate" ToRole="CandidateCertifications" />
           <NavigationProperty Name="CandidateExperiences" Relationship="Self.FK_CandidateExperience_Candidate" FromRole="Candidate" ToRole="CandidateExperience" />
@@ -723,7 +725,6 @@
           <NavigationProperty Name="CandidateProjects" Relationship="Self.FK_CandidateProjects_Candidate" FromRole="Candidate" ToRole="CandidateProjects" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="Candidate" ToRole="CandidateQualification" />
           <NavigationProperty Name="CandidateSkills" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="Candidate" ToRole="CandidateSkills" />
-          <Property Name="Summary" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CandidateCertification">
           <Key>
@@ -838,7 +839,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Job" FromRole="Job" ToRole="CandidateJob" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Job_Organization1" FromRole="Job" ToRole="Organization" />
-          <NavigationProperty Name="JobQualification" Relationship="Self.FK_JobQualification_Job" FromRole="Job" ToRole="JobQualification" />
+          <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Job1" FromRole="Job" ToRole="JobQualification" />
           <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_Job" FromRole="Job" ToRole="JobSkills" />
         </EntityType>
         <EntityType Name="JobQualification">
@@ -860,7 +861,7 @@
           <Property Name="TotalPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="YourGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Job" Relationship="Self.FK_JobQualification_Job" FromRole="JobQualification" ToRole="Job" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_JobQualification_Job1" FromRole="JobQualification" ToRole="Job" />
           <NavigationProperty Name="Qualification" Relationship="Self.FK_JobQualification_Qualification" FromRole="JobQualification" ToRole="Qualification" />
         </EntityType>
         <EntityType Name="JobSkill">
@@ -897,7 +898,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QualificationName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="QualificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="Qualification" ToRole="CandidateQualification" />
           <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Qualification" FromRole="Qualification" ToRole="JobQualification" />
         </EntityType>
@@ -1104,15 +1105,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobQualification_Job">
+        <Association Name="FK_JobQualification_Job1">
           <End Role="Job" Type="Self.Job" Multiplicity="1" />
-          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Job">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="JobQualification">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="JobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1237,7 +1238,7 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobQualification_Job" Association="Self.FK_JobQualification_Job">
+          <AssociationSet Name="FK_JobQualification_Job1" Association="Self.FK_JobQualification_Job1">
             <End Role="Job" EntitySet="Jobs" />
             <End Role="JobQualification" EntitySet="JobQualifications" />
           </AssociationSet>
@@ -1263,9 +1264,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProRecruit_FinalModelStoreContainer" CdmEntityContainer="ProRecruit_FinalEntities">
+        <EntityContainerMapping StorageEntityContainer="ProRecruitStoreContainer" CdmEntityContainer="ProRecruit_FinalEntities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="ProRecruit.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -1275,7 +1276,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetRole">
+            <EntityTypeMapping TypeName="ProRecruit.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1283,7 +1284,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="ProRecruit.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1293,7 +1294,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="ProRecruit.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -1302,9 +1303,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.AspNetUser">
+            <EntityTypeMapping TypeName="ProRecruit.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -1317,13 +1317,13 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Candidates">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Candidate">
+            <EntityTypeMapping TypeName="ProRecruit.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1341,11 +1341,12 @@
                 <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
                 <ScalarProperty Name="CarreerLevel" ColumnName="CarreerLevel" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateCertifications">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateCertification">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateCertification">
               <MappingFragment StoreEntitySet="CandidateCertifications">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CertificationTitle" ColumnName="CertificationTitle" />
@@ -1355,7 +1356,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateExperiences">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateExperience">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateExperience">
               <MappingFragment StoreEntitySet="CandidateExperience">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
@@ -1369,7 +1370,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateJobs">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateJob">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateJob">
               <MappingFragment StoreEntitySet="CandidateJob">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
@@ -1379,7 +1380,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateLanguages">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateLanguage">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateLanguage">
               <MappingFragment StoreEntitySet="CandidateLanguages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="LanguageTitle" ColumnName="LanguageTitle" />
@@ -1389,7 +1390,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateProjects">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateProject">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateProject">
               <MappingFragment StoreEntitySet="CandidateProjects">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
@@ -1402,7 +1403,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateQualifications">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateQualification">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateQualification">
               <MappingFragment StoreEntitySet="CandidateQualification">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
@@ -1426,7 +1427,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidateSkills">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.CandidateSkill">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateSkill">
               <MappingFragment StoreEntitySet="CandidateSkills">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
@@ -1436,7 +1437,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jobs">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Job">
+            <EntityTypeMapping TypeName="ProRecruit.Job">
               <MappingFragment StoreEntitySet="Job">
                 <ScalarProperty Name="DatePublished" ColumnName="DatePublished" />
                 <ScalarProperty Name="DateApplyBy" ColumnName="DateApplyBy" />
@@ -1455,7 +1456,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JobQualifications">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.JobQualification">
+            <EntityTypeMapping TypeName="ProRecruit.JobQualification">
               <MappingFragment StoreEntitySet="JobQualification">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
@@ -1476,7 +1477,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JobSkills">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.JobSkill">
+            <EntityTypeMapping TypeName="ProRecruit.JobSkill">
               <MappingFragment StoreEntitySet="JobSkills">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
@@ -1485,7 +1486,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Organizations">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Organization">
+            <EntityTypeMapping TypeName="ProRecruit.Organization">
               <MappingFragment StoreEntitySet="Organization">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1503,7 +1504,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Qualifications">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Qualification">
+            <EntityTypeMapping TypeName="ProRecruit.Qualification">
               <MappingFragment StoreEntitySet="Qualification">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
@@ -1511,7 +1512,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Skills">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.Skill">
+            <EntityTypeMapping TypeName="ProRecruit.Skill">
               <MappingFragment StoreEntitySet="Skill">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SkillName" ColumnName="SkillName" />
@@ -1519,7 +1520,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ProRecruit_FinalModel.sysdiagram">
+            <EntityTypeMapping TypeName="ProRecruit.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1529,7 +1530,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ProRecruit_FinalModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ProRecruit.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>

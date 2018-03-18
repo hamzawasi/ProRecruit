@@ -1,0 +1,102 @@
+﻿
+@model IEnumerable<ProRecruit.JobQualification>
+
+@{
+    ViewBag.Title = "QualificationMulitpleView";
+}
+
+<h2>Your Qualifications</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Institution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DegreeLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DegreeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DegreeTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MajorSubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGPA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YourGPA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qualification.QualificationName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MajorSubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalGPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YourGPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

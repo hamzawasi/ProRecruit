@@ -98,6 +98,8 @@
                 @Html.DisplayFor(modelItem => item.JobQualification.DegreeLevel)
             </td>
             <td>
+                @Html.ActionLink("View Candidates Applied", "ViewCandidatesApplied", "Jobs", new { id = item.Id }, new { @class = "btn btn-primary"}) |
+                @Html.ActionLink("Add Qualifications", "AddJobQualifications", "Jobs", new { id = item.Id }, new { @class = "btn btn-primary" }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

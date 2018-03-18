@@ -18,7 +18,7 @@ namespace ProRecruit.Controllers
         // GET: Jobs
         public ActionResult Index()
         {
-            var jobs = db.Jobs.Include(j => j.Organization).Include(j => j.JobQualification);
+            var jobs = db.Jobs.Include(j => j.Organization);
             return View(jobs.ToList());
         }
 
@@ -29,6 +29,106 @@ namespace ProRecruit.Controllers
                                    where jp.UserId.Equals(userid)
                                    select jp);
             return View(jobsPosted);
+        }
+
+        [Authorize]
+        public ActionResult AddJobQualifications(int? id)
+        {
+            ViewBag.JobId = id.ToString();
+            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName");
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddJobQualifications(JobQualification jq)
+        {
+            string viewBagJobId = Request["JobId"].ToString();
+            //ViewBag.Trigger = Request.Form["JobId"];
+            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", jq.QualificationId);
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    jq.JobId = Convert.ToInt32(viewBagJobId);
+                    if (jq.Id > 0)
+                    {
+                        db.Entry(jq).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.JobQualifications.Add(jq);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+            return View(jq);
+        }
+
+        [Authorize]
+        public ActionResult QualificationMulitpleView(int id)
+        {
+            var qualifications = from qualification in db.JobQualifications
+                                 where qualification.JobId.Equals(id)
+                                 select qualification;
+            return View(qualifications.ToList());
+        }
+
+        [Authorize]
+        public ActionResult AddJobSkills(int? id)
+        {
+            ViewBag.JobId = id.ToString();
+            ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName");
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddJobSkills(JobSkill js)
+        {
+            string viewBagJobId = Request["JobId"].ToString();
+            //ViewBag.Trigger = Request.Form["JobId"];
+            ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName", js.SkillId);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    js.JobId = Convert.ToInt32(viewBagJobId);
+                    if (js.Id > 0)
+                    {
+                        db.Entry(js).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.JobSkills.Add(js);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+            return View(js);
+        }
+
+        [Authorize]
+        public ActionResult SkillMulitpleView(int id)
+        {
+            var skills = from skill in db.JobSkills
+                         where skill.JobId.Equals(id)
+                         select skill;
+            return View(skills.ToList());
         }
 
         // GET: Jobs/Details/5
@@ -79,6 +179,19 @@ namespace ProRecruit.Controllers
         }
 
         [Authorize]
+        public ActionResult ViewCandidatesApplied(string jobId)
+        {
+            //string userid = User.Identity.GetUserId();
+            int id = Convert.ToInt32(jobId);
+            var candidatesApplied = from candidateJob in db.CandidateJobs
+                                    join job in db.Jobs
+                                    on candidateJob.JobId equals job.Id
+                                    where job.Id == id
+                                    select candidateJob;
+            return View(candidatesApplied);
+        }
+
+        [Authorize]
         public ActionResult ViewJobsAppliedFor()
         {
             string userid = User.Identity.GetUserId();
@@ -91,6 +204,7 @@ namespace ProRecruit.Controllers
             var jobs = db.Jobs.ToList();
             return View(jobs);
         }
+
 
         public ActionResult ApplyForJob(int? id)
         {
