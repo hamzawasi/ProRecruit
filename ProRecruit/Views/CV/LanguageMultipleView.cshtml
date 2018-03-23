@@ -6,31 +6,40 @@
 
 <h2>Your Languages</h2>
 
+@if (!Model.Any())
+{
+    <p>You havent added any Languages yet</p>
+}
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LanguageTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProficiencyWithLanguage)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+else
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LanguageTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProficiencyWithLanguage)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.LanguageTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProficiencyWithLanguage)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LanguageTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProficiencyWithLanguage)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+

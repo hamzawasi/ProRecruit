@@ -57,11 +57,29 @@ namespace ProRecruit.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult GetTypesByQualification(string id)
+        {
+            int _id = Convert.ToInt32(id);
+            List<SelectListItem> types = new List<SelectListItem>();
+            var fetchTypes = db.QualificationTypes.Where(ft => ft.TypeOf == _id).ToList();
+            for (int i = 0; i < fetchTypes.Count; i++)
+            {
+                types.Add(new SelectListItem
+                {
+                    Value = fetchTypes[i].Id.ToString(),
+                    Text = fetchTypes[i].TypeName
+                });
+            }
+            return Json(types);
+        }
+
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult AddCandidateQualifications(CandidateQualification cq)
         {
-            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", cq.QualificationId);
+            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", cq.DegreeLevel);
 
             string id = User.Identity.GetUserId();
             cq.UserId = id;

@@ -138,7 +138,7 @@ namespace ProRecruit.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Job job = db.Jobs.Find(id);
+            Job job = db.Jobs.Where(j => j.Id == id).SingleOrDefault();
             if (job == null)
             {
                 return HttpNotFound();

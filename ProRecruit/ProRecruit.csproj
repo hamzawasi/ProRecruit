@@ -205,6 +205,9 @@
     <Compile Include="CandidateSkill.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CareerLevel.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\CVController.cs" />
@@ -215,8 +218,14 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="FunctionalArea.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Industry.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Job.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
@@ -250,6 +259,9 @@
       <DependentUpon>ProRecruit_Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Qualification.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QualificationType.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Skill.cs">

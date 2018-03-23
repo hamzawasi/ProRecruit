@@ -11,29 +11,44 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class CandidateQualification
     {
         public int Id { get; set; }
-        public int QualificationId { get; set; }
-        public string Institute { get; set; }
+        [Required(ErrorMessage = "Completion Date is Required")]
+        [Display(Name = "Date Completed")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> DateCompleted { get; set; }
-        public string DegreeLevel { get; set; }
-        public string DegreeType { get; set; }
+        [Display(Name = "Degree Title")]
         public string Degreetitle { get; set; }
+        [Display(Name = "Major Subjects")]
+        [Required(ErrorMessage = "Major Subjects are Required. Use commas to seperate")]
         public string MajorSubjects { get; set; }
+        //[Required(ErrorMessage = "Country Is Required")]
         public string Country { get; set; }
+        //[Required(ErrorMessage = "City Is Required")]
         public string City { get; set; }
+        [Required(ErrorMessage = "Institution Is Required")]
         public string Institution { get; set; }
-        public string CompletionYear { get; set; }
+        [Display(Name = "Result Type")]
         public string ResultType { get; set; }
+        [Display(Name = "Total GPA")]
         public string TotalGPA { get; set; }
+        [Display(Name = "Grade")]
         public string TotalGrade { get; set; }
+        [Display(Name = "Percentage")]
         public string TotalPercentage { get; set; }
+        [Display(Name = "Your GPA")]
         public string YourGPA { get; set; }
         public string UserId { get; set; }
-    
+        [Display(Name = "Degree Level")]
+        public Nullable<int> DegreeLevel { get; set; }
+        [Display(Name = "Degree Type")]
+        public Nullable<int> DegreeType { get; set; }
+
         public virtual Candidate Candidate { get; set; }
         public virtual Qualification Qualification { get; set; }
+        public virtual QualificationType QualificationType { get; set; }
     }
 }

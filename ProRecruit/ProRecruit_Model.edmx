@@ -82,13 +82,15 @@
           <Property Name="CNIC" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="CurrentAddress" Type="nvarchar(max)" />
           <Property Name="Contact" Type="nvarchar" MaxLength="30" />
-          <Property Name="Industry" Type="nvarchar" MaxLength="30" />
-          <Property Name="FunctionalArea" Type="nvarchar" MaxLength="30" />
-          <Property Name="CurrentSalary" Type="nvarchar" MaxLength="30" />
-          <Property Name="ExpectedSalary" Type="nvarchar" MaxLength="30" />
-          <Property Name="CarreerLevel" Type="nvarchar" MaxLength="30" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Industry" Type="int" />
+          <Property Name="CareerLevel" Type="int" />
+          <Property Name="FunctionalArea" Type="int" />
+          <Property Name="CurrentSalary" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExpectedSalary" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CandidateCertifications">
           <Key>
@@ -147,23 +149,20 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QualificationId" Type="int" Nullable="false" />
-          <Property Name="Institute" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateCompleted" Type="datetime" />
-          <Property Name="DegreeLevel" Type="nvarchar" MaxLength="50" />
-          <Property Name="DegreeType" Type="nvarchar" MaxLength="50" />
           <Property Name="Degreetitle" Type="nvarchar" MaxLength="50" />
           <Property Name="MajorSubjects" Type="nvarchar" MaxLength="50" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="Institution" Type="nvarchar" MaxLength="50" />
-          <Property Name="CompletionYear" Type="nvarchar" MaxLength="50" />
           <Property Name="ResultType" Type="nvarchar" MaxLength="50" />
           <Property Name="TotalGPA" Type="nvarchar" MaxLength="50" />
           <Property Name="TotalGrade" Type="nvarchar" MaxLength="50" />
           <Property Name="TotalPercentage" Type="nvarchar" MaxLength="50" />
           <Property Name="YourGPA" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="DegreeLevel" Type="int" />
+          <Property Name="DegreeType" Type="int" />
         </EntityType>
         <EntityType Name="CandidateSkills">
           <Key>
@@ -173,6 +172,27 @@
           <Property Name="SkillId" Type="int" Nullable="false" />
           <Property Name="ExperienceWithSkill" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CareerLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FunctionalArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -191,6 +211,9 @@
           <Property Name="AgeRequirement" Type="nvarchar" MaxLength="20" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="JobQualification">
           <Key>
@@ -244,6 +267,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QualificationName" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="QualificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar(max)" />
+          <Property Name="TypeOf" Type="int" />
+        </EntityType>
         <EntityType Name="Skill">
           <Key>
             <PropertyRef Name="Id" />
@@ -282,6 +313,42 @@
             </Principal>
             <Dependent Role="Candidate">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_CareerLevel">
+          <End Role="CareerLevel" Type="Self.CareerLevel" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="CareerLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_FunctionalArea">
+          <End Role="FunctionalArea" Type="Self.FunctionalArea" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FunctionalArea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="FunctionalArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_Industry">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="Industry" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -370,14 +437,26 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CandidateQualification_Qualification">
-          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
           <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Qualification">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CandidateQualification">
-              <PropertyRef Name="QualificationId" />
+              <PropertyRef Name="DegreeLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_QualificationType">
+          <End Role="QualificationType" Type="Self.QualificationType" Multiplicity="0..1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QualificationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="DegreeType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -521,6 +600,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QualificationType_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="QualificationType" Type="Self.QualificationType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QualificationType">
+              <PropertyRef Name="TypeOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ProRecruitStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -536,11 +627,15 @@
           <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CareerLevel" EntityType="Self.CareerLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FunctionalArea" EntityType="Self.FunctionalArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobQualification" EntityType="Self.JobQualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobSkills" EntityType="Self.JobSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QualificationType" EntityType="Self.QualificationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
@@ -549,6 +644,18 @@
           </AssociationSet>
           <AssociationSet Name="FK_Candidate_AspNetUsers" Association="Self.FK_Candidate_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_CareerLevel" Association="Self.FK_Candidate_CareerLevel">
+            <End Role="CareerLevel" EntitySet="CareerLevel" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_FunctionalArea" Association="Self.FK_Candidate_FunctionalArea">
+            <End Role="FunctionalArea" EntitySet="FunctionalArea" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_Industry" Association="Self.FK_Candidate_Industry">
+            <End Role="Industry" EntitySet="Industry" />
             <End Role="Candidate" EntitySet="Candidate" />
           </AssociationSet>
           <AssociationSet Name="FK_CandidateCertifications_Candidate" Association="Self.FK_CandidateCertifications_Candidate">
@@ -581,6 +688,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_CandidateQualification_Qualification" Association="Self.FK_CandidateQualification_Qualification">
             <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_QualificationType" Association="Self.FK_CandidateQualification_QualificationType">
+            <End Role="QualificationType" EntitySet="QualificationType" />
             <End Role="CandidateQualification" EntitySet="CandidateQualification" />
           </AssociationSet>
           <AssociationSet Name="FK_CandidateSkills_Candidate" Association="Self.FK_CandidateSkills_Candidate">
@@ -626,6 +737,10 @@
           <AssociationSet Name="FK_Organization_AspNetUsers" Association="Self.FK_Organization_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Organization" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QualificationType_Qualification" Association="Self.FK_QualificationType_Qualification">
+            <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="QualificationType" EntitySet="QualificationType" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -710,14 +825,19 @@
           <Property Name="CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CurrentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Contact" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Industry" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="FunctionalArea" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CurrentSalary" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ExpectedSalary" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CarreerLevel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Industry" Type="Int32" />
+          <Property Name="CareerLevel" Type="Int32" />
+          <Property Name="FunctionalArea" Type="Int32" />
+          <Property Name="CurrentSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="Candidate" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CareerLevel1" Relationship="Self.FK_Candidate_CareerLevel" FromRole="Candidate" ToRole="CareerLevel" />
+          <NavigationProperty Name="FunctionalArea1" Relationship="Self.FK_Candidate_FunctionalArea" FromRole="Candidate" ToRole="FunctionalArea" />
+          <NavigationProperty Name="Industry1" Relationship="Self.FK_Candidate_Industry" FromRole="Candidate" ToRole="Industry" />
           <NavigationProperty Name="CandidateCertifications" Relationship="Self.FK_CandidateCertifications_Candidate" FromRole="Candidate" ToRole="CandidateCertifications" />
           <NavigationProperty Name="CandidateExperiences" Relationship="Self.FK_CandidateExperience_Candidate" FromRole="Candidate" ToRole="CandidateExperience" />
           <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Candidate" FromRole="Candidate" ToRole="CandidateJob" />
@@ -789,25 +909,23 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QualificationId" Type="Int32" Nullable="false" />
-          <Property Name="Institute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateCompleted" Type="DateTime" Precision="3" />
-          <Property Name="DegreeLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DegreeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Degreetitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MajorSubjects" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Institution" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CompletionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ResultType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="YourGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeLevel" Type="Int32" />
+          <Property Name="DegreeType" Type="Int32" />
           <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="CandidateQualification" ToRole="Candidate" />
           <NavigationProperty Name="Qualification" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="CandidateQualification" ToRole="Qualification" />
+          <NavigationProperty Name="QualificationType" Relationship="Self.FK_CandidateQualification_QualificationType" FromRole="CandidateQualification" ToRole="QualificationType" />
         </EntityType>
         <EntityType Name="CandidateSkill">
           <Key>
@@ -819,6 +937,30 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="CandidateSkills" ToRole="Candidate" />
           <NavigationProperty Name="Skill" Relationship="Self.CandidateSkills_SkillId_FK" FromRole="CandidateSkills" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="CareerLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Candidates" Relationship="Self.FK_Candidate_CareerLevel" FromRole="CareerLevel" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="FunctionalArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Candidates" Relationship="Self.FK_Candidate_FunctionalArea" FromRole="FunctionalArea" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Candidates" Relationship="Self.FK_Candidate_Industry" FromRole="Industry" ToRole="Candidate" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -837,6 +979,9 @@
           <Property Name="AgeRequirement" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Job" FromRole="Job" ToRole="CandidateJob" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Job_Organization1" FromRole="Job" ToRole="Organization" />
           <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Job1" FromRole="Job" ToRole="JobQualification" />
@@ -901,6 +1046,17 @@
           <Property Name="QualificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="Qualification" ToRole="CandidateQualification" />
           <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Qualification" FromRole="Qualification" ToRole="JobQualification" />
+          <NavigationProperty Name="QualificationTypes" Relationship="Self.FK_QualificationType_Qualification" FromRole="Qualification" ToRole="QualificationType" />
+        </EntityType>
+        <EntityType Name="QualificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOf" Type="Int32" />
+          <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_QualificationType" FromRole="QualificationType" ToRole="CandidateQualification" />
+          <NavigationProperty Name="Qualification" Relationship="Self.FK_QualificationType_Qualification" FromRole="QualificationType" ToRole="Qualification" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -970,6 +1126,42 @@
             </Principal>
             <Dependent Role="Organization">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_CareerLevel">
+          <End Role="CareerLevel" Type="Self.CareerLevel" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="CareerLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_FunctionalArea">
+          <End Role="FunctionalArea" Type="Self.FunctionalArea" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FunctionalArea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="FunctionalArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_Industry">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="Industry" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1070,14 +1262,26 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CandidateQualification_Qualification">
-          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
           <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Qualification">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CandidateQualification">
-              <PropertyRef Name="QualificationId" />
+              <PropertyRef Name="DegreeLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateQualification_QualificationType">
+          <End Role="QualificationType" Type="Self.QualificationType" Multiplicity="0..1" />
+          <End Role="CandidateQualification" Type="Self.CandidateQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QualificationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateQualification">
+              <PropertyRef Name="DegreeType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1153,6 +1357,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QualificationType_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="QualificationType" Type="Self.QualificationType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QualificationType">
+              <PropertyRef Name="TypeOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -1171,11 +1387,15 @@
           <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProject" />
           <EntitySet Name="CandidateQualifications" EntityType="Self.CandidateQualification" />
           <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkill" />
+          <EntitySet Name="CareerLevels" EntityType="Self.CareerLevel" />
+          <EntitySet Name="FunctionalAreas" EntityType="Self.FunctionalArea" />
+          <EntitySet Name="Industries" EntityType="Self.Industry" />
           <EntitySet Name="Jobs" EntityType="Self.Job" />
           <EntitySet Name="JobQualifications" EntityType="Self.JobQualification" />
           <EntitySet Name="JobSkills" EntityType="Self.JobSkill" />
           <EntitySet Name="Organizations" EntityType="Self.Organization" />
           <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+          <EntitySet Name="QualificationTypes" EntityType="Self.QualificationType" />
           <EntitySet Name="Skills" EntityType="Self.Skill" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -1193,6 +1413,18 @@
           <AssociationSet Name="FK_Organization_AspNetUsers" Association="Self.FK_Organization_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Organization" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_CareerLevel" Association="Self.FK_Candidate_CareerLevel">
+            <End Role="CareerLevel" EntitySet="CareerLevels" />
+            <End Role="Candidate" EntitySet="Candidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_FunctionalArea" Association="Self.FK_Candidate_FunctionalArea">
+            <End Role="FunctionalArea" EntitySet="FunctionalAreas" />
+            <End Role="Candidate" EntitySet="Candidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_Industry" Association="Self.FK_Candidate_Industry">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Candidate" EntitySet="Candidates" />
           </AssociationSet>
           <AssociationSet Name="FK_CandidateCertifications_Candidate" Association="Self.FK_CandidateCertifications_Candidate">
             <End Role="Candidate" EntitySet="Candidates" />
@@ -1230,6 +1462,10 @@
             <End Role="Qualification" EntitySet="Qualifications" />
             <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
           </AssociationSet>
+          <AssociationSet Name="FK_CandidateQualification_QualificationType" Association="Self.FK_CandidateQualification_QualificationType">
+            <End Role="QualificationType" EntitySet="QualificationTypes" />
+            <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
+          </AssociationSet>
           <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
             <End Role="Skill" EntitySet="Skills" />
             <End Role="CandidateSkills" EntitySet="CandidateSkills" />
@@ -1253,6 +1489,10 @@
           <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
             <End Role="Skill" EntitySet="Skills" />
             <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QualificationType_Qualification" Association="Self.FK_QualificationType_Qualification">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="QualificationType" EntitySet="QualificationTypes" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1335,13 +1575,15 @@
                 <ScalarProperty Name="CNIC" ColumnName="CNIC" />
                 <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="CareerLevel" ColumnName="CareerLevel" />
                 <ScalarProperty Name="FunctionalArea" ColumnName="FunctionalArea" />
                 <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
                 <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
-                <ScalarProperty Name="CarreerLevel" ColumnName="CarreerLevel" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1406,23 +1648,20 @@
             <EntityTypeMapping TypeName="ProRecruit.CandidateQualification">
               <MappingFragment StoreEntitySet="CandidateQualification">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
-                <ScalarProperty Name="Institute" ColumnName="Institute" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-                <ScalarProperty Name="DegreeLevel" ColumnName="DegreeLevel" />
-                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
                 <ScalarProperty Name="Degreetitle" ColumnName="Degreetitle" />
                 <ScalarProperty Name="MajorSubjects" ColumnName="MajorSubjects" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Institution" ColumnName="Institution" />
-                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
                 <ScalarProperty Name="ResultType" ColumnName="ResultType" />
                 <ScalarProperty Name="TotalGPA" ColumnName="TotalGPA" />
                 <ScalarProperty Name="TotalGrade" ColumnName="TotalGrade" />
                 <ScalarProperty Name="TotalPercentage" ColumnName="TotalPercentage" />
                 <ScalarProperty Name="YourGPA" ColumnName="YourGPA" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DegreeLevel" ColumnName="DegreeLevel" />
+                <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1433,6 +1672,30 @@
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
                 <ScalarProperty Name="ExperienceWithSkill" ColumnName="ExperienceWithSkill" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CareerLevels">
+            <EntityTypeMapping TypeName="ProRecruit.CareerLevel">
+              <MappingFragment StoreEntitySet="CareerLevel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FunctionalAreas">
+            <EntityTypeMapping TypeName="ProRecruit.FunctionalArea">
+              <MappingFragment StoreEntitySet="FunctionalArea">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Industries">
+            <EntityTypeMapping TypeName="ProRecruit.Industry">
+              <MappingFragment StoreEntitySet="Industry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1452,6 +1715,9 @@
                 <ScalarProperty Name="AgeRequirement" ColumnName="AgeRequirement" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1508,6 +1774,15 @@
               <MappingFragment StoreEntitySet="Qualification">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QualificationTypes">
+            <EntityTypeMapping TypeName="ProRecruit.QualificationType">
+              <MappingFragment StoreEntitySet="QualificationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -6,31 +6,39 @@
 
 <h2>Your Certifications</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CertificationTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CertificationDescription)
-        </th>
-        <th></th>
-    </tr>
+@if (!Model.Any())
+{
+    <p>You dont have any Certifications yet</p>
+}
 
-    @foreach (var item in Model)
-    {
+else
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CertificationTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CertificationDescription)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.CertificationTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CertificationDescription)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CertificationTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CertificationDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                </td>
+            </tr>
+        }
 
+    </table>
+
+}

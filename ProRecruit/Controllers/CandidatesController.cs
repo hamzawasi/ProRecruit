@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProRecruit.Models;
 using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace ProRecruit.Controllers
 {
@@ -42,7 +43,7 @@ namespace ProRecruit.Controllers
 			return View(candidate);
 		}
 
-  //      [Authorize]
+		//[Authorize]
 		//public ActionResult Summary()
 		//{
 		//	var candidate = db.Candidates.Find(User.Identity.GetUserId());
@@ -70,7 +71,7 @@ namespace ProRecruit.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			Candidate candidate = db.Candidates.Where(c => c.UserId == id).FirstOrDefault();
+			Candidate candidate = db.Candidates.Include(c => c.CareerLevel1).Include(c => c.FunctionalArea1).Include(c => c.Industry1).Where(c => c.UserId == id).FirstOrDefault();
 			if (candidate == null)
 			{
 				return HttpNotFound();
@@ -82,6 +83,9 @@ namespace ProRecruit.Controllers
 		public ActionResult Create()
 		{
 			//ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+			ViewBag.Industry = new SelectList(db.Industries, "Id", "Name");
+			ViewBag.CareerLevel = new SelectList(db.CareerLevels, "Id", "Name");
+			ViewBag.FunctionalArea = new SelectList(db.FunctionalAreas, "Id", "Name");
 			return View();
 		}
 
@@ -107,6 +111,9 @@ namespace ProRecruit.Controllers
 			}
 
 			//ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", candidate.UserId);
+			ViewBag.Industry = new SelectList(db.Industries, "Id", "Name", candidate.Industry);
+			ViewBag.CareerLevel = new SelectList(db.CareerLevels, "Id", "Name", candidate.CareerLevel);
+			ViewBag.FunctionalArea = new SelectList(db.FunctionalAreas, "Id", "Name", candidate.FunctionalArea);
 			return View(candidate);
 		}
 

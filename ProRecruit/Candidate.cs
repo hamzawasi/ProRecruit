@@ -11,7 +11,8 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Candidate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,27 +26,53 @@ namespace ProRecruit
             this.CandidateQualifications = new HashSet<CandidateQualification>();
             this.CandidateSkills = new HashSet<CandidateSkill>();
         }
-    
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "First Name is Required")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Only alphabets allowed")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Last Name is Required")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Only alphabets allowed")]
         public string LastName { get; set; }
         public string Email { get; set; }
+        [Required(ErrorMessage = "Date of birth is required")]
+        //[DisplayFormat(DataFormatString = "{DD/MM/YYYY}")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date Of Birth")]
         public System.DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
+        [Display(Name = "Marital Status")]
         public string MaritalStatus { get; set; }
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Only alphabets allowed")]
         public string Nationality { get; set; }
         public string City { get; set; }
+        [Required(ErrorMessage = "CNIC is required\n Format is 00000-0000000-0")]
+        [RegularExpression(@"^[0-9]{5}-[0-9]{7}-[0-9]{1}$", ErrorMessage = "Use format 00000-0000000-0")]
         public string CNIC { get; set; }
+        [Display(Name = "Postal Address")]
         public string CurrentAddress { get; set; }
+        [Required(ErrorMessage = "Contact is required\n Format is 0000-0000000")]
+        [RegularExpression(@"^[0-9]{4}-[0-9]{7}$", ErrorMessage = "Use format 0000-0000000")]
         public string Contact { get; set; }
-        public string Industry { get; set; }
-        public string FunctionalArea { get; set; }
-        public string CurrentSalary { get; set; }
-        public string ExpectedSalary { get; set; }
-        public string CarreerLevel { get; set; }
         public string UserId { get; set; }
         public string Summary { get; set; }
-    
+        public string Country { get; set; }
+        public string State { get; set; }
+        public Nullable<int> Industry { get; set; }
+        [Display(Name = "Career Level")]
+        public Nullable<int> CareerLevel { get; set; }
+        [Display(Name = "Functional Area")]
+        public Nullable<int> FunctionalArea { get; set; }
+        [Display(Name = "Current Salary")]
+        public string CurrentSalary { get; set; }
+        [Display(Name = "Expected Salary")]
+        public string ExpectedSalary { get; set; }
+
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual CareerLevel CareerLevel1 { get; set; }
+        public virtual FunctionalArea FunctionalArea1 { get; set; }
+        public virtual Industry Industry1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateCertification> CandidateCertifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

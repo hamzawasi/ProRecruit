@@ -30,14 +30,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -84,9 +76,25 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Country" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="State" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="City" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -102,7 +110,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CurrentAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.CurrentAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.CurrentAddress, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CurrentAddress, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,7 +126,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Industry", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,57 +134,134 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FunctionalArea, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FunctionalArea, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("FunctionalArea", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FunctionalArea, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CareerLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CareerLevel", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CareerLevel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CurrentSalary, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CurrentSalary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.CurrentSalary,
+                new List<SelectListItem> {
+                    new SelectListItem{ Text = "Not Applicable", Value = "N/A"},
+                    new SelectListItem{ Text = "5,000 - 5,999", Value = "5000"},
+                    new SelectListItem{ Text = "6,000 - 6,999", Value = "6000"},
+                    new SelectListItem{ Text = "7,000 - 7,999", Value = "7000"},
+                    new SelectListItem{ Text = "8,000 - 8,999", Value = "8000"},
+                    new SelectListItem{ Text = "9,000 - 9,999", Value = "9000"},
+                    new SelectListItem{ Text = "10,000 - 10,999", Value = "10000"},
+                    new SelectListItem{ Text = "11,000 - 11,999", Value = "11000"},
+                    new SelectListItem{ Text = "12,000 - 12,999", Value = "12000"},
+                    new SelectListItem{ Text = "13,000 - 13,999", Value = "13000"},
+                    new SelectListItem{ Text = "14,000 - 14,999", Value = "14000"},
+                    new SelectListItem{ Text = "15,000 - 15,999", Value = "15000"},
+                    new SelectListItem{ Text = "16,000 - 16,999", Value = "16000"},
+                    new SelectListItem{ Text = "17,000 - 17,999", Value = "17000"},
+                    new SelectListItem{ Text = "18,000 - 18,999", Value = "18000"},
+                    new SelectListItem{ Text = "19,000 - 19,999", Value = "19000"},
+                    new SelectListItem{ Text = "20,000 - 24,999", Value = "20000"},
+                    new SelectListItem{ Text = "25,000 - 29,000", Value = "25000"},
+                    new SelectListItem{ Text = "30,000 - 34,999", Value = "30000"},
+                    new SelectListItem{ Text = "35,000 - 39,999", Value = "35000"},
+                    new SelectListItem{ Text = "40,000 - 44,999", Value = "40000"},
+                    new SelectListItem{ Text = "45,000 - 49,999", Value = "45000"},
+                    new SelectListItem{ Text = "50,000 - 59,999", Value = "50000"},
+                    new SelectListItem{ Text = "60,000 - 69,999", Value = "60000"},
+                    new SelectListItem{ Text = "70,000 - 79,999", Value = "70000"},
+                    new SelectListItem{ Text = "80,000 - 89,999", Value = "80000"},
+                    new SelectListItem{ Text = "90,000 - 99,999", Value = "90000"},
+                    new SelectListItem{ Text = "100,000 - 124,999", Value = "100000"},
+                    new SelectListItem{ Text = "125,000 - 149,999", Value = "125000"},
+                    new SelectListItem{ Text = "150,000 - 174,999", Value = "150000"},
+                    new SelectListItem{ Text = "175,000 - 199,999", Value = "175000"},
+                    new SelectListItem{ Text = "200,000 - 249,999", Value = "200000"},
+                    new SelectListItem{ Text = "250,000 - 299,999", Value = "250000"},
+                    new SelectListItem{ Text = "300,000 - 349,999", Value = "300000"},
+                    new SelectListItem{ Text = "350,000 - 399,999", Value = "350000"},
+                    new SelectListItem{ Text = "400,000 - 449,999", Value = "400000"},
+                    new SelectListItem{ Text = "450,000 - 499,999", Value = "450000"},
+                    new SelectListItem{ Text = "500,000 - 549,999", Value = "500000"},
+                    new SelectListItem{ Text = "550,000 - 599,999", Value = "550000"},
+                    new SelectListItem{ Text = "600,000+", Value = "600001"},
+                        }, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CurrentSalary, "", new { @class = "text-danger" })
-            </div>
+            </div> 
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ExpectedSalary, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpectedSalary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ExpectedSalary,
+                new List<SelectListItem> {
+                    new SelectListItem{ Text = "Not Applicable", Value = "N/A"},
+                    new SelectListItem{ Text = "5,000 - 5,999", Value = "5000"},
+                    new SelectListItem{ Text = "6,000 - 6,999", Value = "6000"},
+                    new SelectListItem{ Text = "7,000 - 7,999", Value = "7000"},
+                    new SelectListItem{ Text = "8,000 - 8,999", Value = "8000"},
+                    new SelectListItem{ Text = "9,000 - 9,999", Value = "9000"},
+                    new SelectListItem{ Text = "10,000 - 10,999", Value = "10000"},
+                    new SelectListItem{ Text = "11,000 - 11,999", Value = "11000"},
+                    new SelectListItem{ Text = "12,000 - 12,999", Value = "12000"},
+                    new SelectListItem{ Text = "13,000 - 13,999", Value = "13000"},
+                    new SelectListItem{ Text = "14,000 - 14,999", Value = "14000"},
+                    new SelectListItem{ Text = "15,000 - 15,999", Value = "15000"},
+                    new SelectListItem{ Text = "16,000 - 16,999", Value = "16000"},
+                    new SelectListItem{ Text = "17,000 - 17,999", Value = "17000"},
+                    new SelectListItem{ Text = "18,000 - 18,999", Value = "18000"},
+                    new SelectListItem{ Text = "19,000 - 19,999", Value = "19000"},
+                    new SelectListItem{ Text = "20,000 - 24,999", Value = "20000"},
+                    new SelectListItem{ Text = "25,000 - 29,000", Value = "25000"},
+                    new SelectListItem{ Text = "30,000 - 34,999", Value = "30000"},
+                    new SelectListItem{ Text = "35,000 - 39,999", Value = "35000"},
+                    new SelectListItem{ Text = "40,000 - 44,999", Value = "40000"},
+                    new SelectListItem{ Text = "45,000 - 49,999", Value = "45000"},
+                    new SelectListItem{ Text = "50,000 - 59,999", Value = "50000"},
+                    new SelectListItem{ Text = "60,000 - 69,999", Value = "60000"},
+                    new SelectListItem{ Text = "70,000 - 79,999", Value = "70000"},
+                    new SelectListItem{ Text = "80,000 - 89,999", Value = "80000"},
+                    new SelectListItem{ Text = "90,000 - 99,999", Value = "90000"},
+                    new SelectListItem{ Text = "100,000 - 124,999", Value = "100000"},
+                    new SelectListItem{ Text = "125,000 - 149,999", Value = "125000"},
+                    new SelectListItem{ Text = "150,000 - 174,999", Value = "150000"},
+                    new SelectListItem{ Text = "175,000 - 199,999", Value = "175000"},
+                    new SelectListItem{ Text = "200,000 - 249,999", Value = "200000"},
+                    new SelectListItem{ Text = "250,000 - 299,999", Value = "250000"},
+                    new SelectListItem{ Text = "300,000 - 349,999", Value = "300000"},
+                    new SelectListItem{ Text = "350,000 - 399,999", Value = "350000"},
+                    new SelectListItem{ Text = "400,000 - 449,999", Value = "400000"},
+                    new SelectListItem{ Text = "450,000 - 499,999", Value = "450000"},
+                    new SelectListItem{ Text = "500,000 - 549,999", Value = "500000"},
+                    new SelectListItem{ Text = "550,000 - 599,999", Value = "550000"},
+                    new SelectListItem{ Text = "600,000+", Value = "600001"},
+                        }, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ExpectedSalary, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CarreerLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CarreerLevel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CarreerLevel, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*@Html.HiddenFor(model => model.UserId)*@
+        @Html.HiddenFor(model => model.City, new { id = "hiddenCity" })
+        @Html.HiddenFor(model => model.State, new { id = "hiddenState" })
+        @Html.HiddenFor(model => model.Country, new { id = "hiddenCountry" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="Create" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -185,3 +270,77 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetCountries();
+        GetStates();
+        GetCities();
+    });
+
+    $("#Create").click(function () {
+        var valCity = $("#City :selected").text();
+        var valState = $("#State :selected").text();
+        var valCountry = $("#Country :selected").text();
+
+        $("#hiddenCity").val(valCity);
+        $("#hiddenCountry").val(valCountry);
+        $("#hiddenState").val(valState);
+    });
+
+    function GetCountries() {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&style=full&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $("#Country").empty();
+                $("#Country").append($('<option />', { value: -1, text: 'Select Country' }));
+                $(data.geonames).each(function (index, item) {
+                    $("#Country").append($('<option />', { value: item.geonameId, text: item.countryName }));
+                });
+            },
+            error: function (data) {
+                alert("Failed to get countries.");
+            }
+        });
+    }
+
+    function GetStates() {
+        $("#Country").change(function () {
+            GetChildren($(this).val(), "State", $("#State"));
+        });
+    }
+
+    function GetCities() {
+        $("#State").change(function () {
+            GetChildren($(this).val(), "City", $("#City"));
+        });
+    };
+
+    function GetChildren(geoNameId, childType, ddlSelector) {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/childrenJSON?geonameId=" + geoNameId + "&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $(ddlSelector).empty();
+                $(ddlSelector).append($('<option />', { value: -1, text: 'Select ' + childType }));
+                $(data.geonames).each(function (index, item) {
+                    $(ddlSelector).append($('<option />', { value: item.geonameId, text: item.name }));
+                });
+            },
+            error: function (data) {
+                alert("failed to get data");
+            }
+        });
+    }
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

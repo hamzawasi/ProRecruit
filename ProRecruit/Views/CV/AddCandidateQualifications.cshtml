@@ -11,7 +11,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @*<h4>Candidate's Qualification</h4>*@
         <hr />
         <p>
             @Html.ActionLink("Next Step", "AddCandidateCertifications", "CV", null, new { @class = "btn btn-primary" })
@@ -30,40 +29,18 @@
             @Html.LabelFor(model => model.Qualification.QualificationName, "QualificationName", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("QualificationId", null, htmlAttributes: new { name = "QualificationId", @class = "form-control" })
-                @*@Html.DropDownList("QualificationName", ViewBag.AddCandidateQualification as SelectList, new { @class = "form-data" })*@
                 @Html.ValidationMessageFor(model => model.Qualification.QualificationName, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Institute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Institute, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Institute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateCompleted, htmlAttributes: new { @class = "control-label col-md-2", @type = "date" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateCompleted, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DegreeLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DegreeLevel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DegreeLevel, "", new { @class = "text-danger" })
-            </div>
-        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.DegreeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DegreeType, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="DegreeType" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.DegreeType, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Degreetitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -71,6 +48,7 @@
                 @Html.ValidationMessageFor(model => model.Degreetitle, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.MajorSubjects, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,18 +56,26 @@
                 @Html.ValidationMessageFor(model => model.MajorSubjects, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Institute, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Institute, "", new { @class = "text-danger" })
+                <select id="Country" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">State</label>
+            <div class="col-md-10">
+                <select id="State" class="form-control"></select>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="City" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -103,10 +89,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CompletionYear, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateCompleted, htmlAttributes: new { @class = "control-label col-md-2", @type = "date" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CompletionYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CompletionYear, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateCompleted, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -150,7 +136,8 @@
             </div>
         </div>
 
-
+        @Html.HiddenFor(model => model.City, new { id = "hiddenCity" })
+        @Html.HiddenFor(model => model.Country, new { id = "hiddenCountry" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -163,15 +150,105 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
     $(document).ready(function () {
-
         $.ajax({
             url: "@Url.Action("QualificationMulitpleView", "CV")", success: function (result) {
                 $("#multipleView").html(result);
             }
         });
-
-
+        GetCountries();
+        GetStates();
+        GetCities();
     })
+
+    $("#Create").click(function () {
+        var valCity = $("#City :selected").text();
+        var valCountry = $("#Country :selected").text();
+
+        $("#hiddenCity").val(valCity);
+        $("#hiddenCountry").val(valCountry);
+    });
+
+    $("#QualificationId").change(function () {
+        //var qualificationId = $("#QualificationId :selected").text();
+        var qualificationId = $("#QualificationId").val();
+        var ddlQualificationTypes = $("#DegreeType");
+        ddlQualificationTypes.empty();
+        $.ajax({
+            type: "POST",
+            url: "/CV/GetTypesByQualification/" + qualificationId,
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                //if (!$.trim(data))
+                //{
+                //    $("#DegreeType").prop("disabled", true);
+                //}
+                //else {
+                    ddlQualificationTypes.empty().append('<option selected="selected" value="0">Please select</option>');
+                    $.each(response, function () {
+                        ddlQualificationTypes.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                //}
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+    function GetCountries() {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&style=full&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $("#Country").empty();
+                $("#Country").append($('<option />', { value: -1, text: 'Select Country' }));
+                $(data.geonames).each(function (index, item) {
+                    $("#Country").append($('<option />', { value: item.geonameId, text: item.countryName }));
+                });
+            },
+            error: function (data) {
+                alert("Failed to get countries.");
+            }
+        });
+    }
+
+    function GetStates() {
+        $("#Country").change(function () {
+            GetChildren($(this).val(), "State", $("#State"));
+        });
+    }
+
+    function GetCities() {
+        $("#State").change(function () {
+            GetChildren($(this).val(), "City", $("#City"));
+        });
+    };
+
+    function GetChildren(geoNameId, childType, ddlSelector) {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/childrenJSON?geonameId=" + geoNameId + "&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $(ddlSelector).empty();
+                $(ddlSelector).append($('<option />', { value: -1, text: 'Select ' + childType }));
+                $(data.geonames).each(function (index, item) {
+                    $(ddlSelector).append($('<option />', { value: item.geonameId, text: item.name }));
+                });
+            },
+            error: function (data) {
+                alert("failed to get data");
+            }
+        });
+    }
 </script>
 <div>
     @Html.ActionLink("Back to List", "Index")

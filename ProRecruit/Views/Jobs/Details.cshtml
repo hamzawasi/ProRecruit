@@ -7,7 +7,7 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="jumbotron">
     <h4>Job</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -117,7 +117,32 @@
 
     </dl>
 </div>
+
+<div class="jumbotron" id="QualificationMulitpleView"></div>
+<br />
+<div class="jumbotron" id="SkillMulitpleView"></div>
+<br />
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("QualificationMulitpleView", "Jobs", new { id = Model.Id })", success:function (result)
+            {
+                $("#QualificationMulitpleView").html(result);
+            }
+        })
+        $.ajax({
+            url: "@Url.Action("SkillMulitpleView", "Jobs", new { id = Model.Id })", success:function (result)
+            {
+                $("#SkillMulitpleView").html(result);
+            }
+        })
+    })
+</script>
