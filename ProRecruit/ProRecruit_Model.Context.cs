@@ -31,7 +31,6 @@ namespace ProRecruit
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Candidate> Candidates { get; set; }
-        public virtual DbSet<CandidateCertification> CandidateCertifications { get; set; }
         public virtual DbSet<CandidateExperience> CandidateExperiences { get; set; }
         public virtual DbSet<CandidateJob> CandidateJobs { get; set; }
         public virtual DbSet<CandidateLanguage> CandidateLanguages { get; set; }

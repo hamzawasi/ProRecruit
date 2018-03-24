@@ -15,13 +15,14 @@ namespace ProRecruit
     public partial class CandidateExperience
     {
         public int Id { get; set; }
-        public string OrganizationName { get; set; }
         public string PositionHeld { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string UserId { get; set; }
+        public string Description { get; set; }
+        public string OrganizationName { get; set; }
     
         public virtual Candidate Candidate { get; set; }
     }

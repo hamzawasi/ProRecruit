@@ -19,7 +19,6 @@ namespace ProRecruit
         public Qualification()
         {
             this.CandidateQualifications = new HashSet<CandidateQualification>();
-            this.JobQualifications = new HashSet<JobQualification>();
             this.QualificationTypes = new HashSet<QualificationType>();
         }
     
@@ -29,8 +28,6 @@ namespace ProRecruit
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateQualification> CandidateQualifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JobQualification> JobQualifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QualificationType> QualificationTypes { get; set; }
     }

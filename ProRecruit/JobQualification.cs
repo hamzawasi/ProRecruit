@@ -16,21 +16,13 @@ namespace ProRecruit
     {
         public int Id { get; set; }
         public int JobId { get; set; }
-        public Nullable<int> QualificationId { get; set; }
-        public string DegreeLevel { get; set; }
-        public string DegreeType { get; set; }
-        public string DegreeTitle { get; set; }
-        public string MajorSubject { get; set; }
-        public string Location { get; set; }
-        public string Institution { get; set; }
-        public string CompletionYear { get; set; }
         public string ResultType { get; set; }
         public string TotalGPA { get; set; }
         public string TotalPercentage { get; set; }
         public string TotalGrade { get; set; }
         public string YourGPA { get; set; }
+        public Nullable<int> DegreeLevel { get; set; }
     
         public virtual Job Job { get; set; }
-        public virtual Qualification Qualification { get; set; }
     }
 }

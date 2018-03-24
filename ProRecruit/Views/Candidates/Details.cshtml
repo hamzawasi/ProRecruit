@@ -154,8 +154,8 @@
 </div>
 
 <div class="jumbotron" id="QualificationMulitpleView"></div>
-<br />
-<div class="jumbotron" id="CertificationsMultipleView"></div>
+@*<br />
+<div class="jumbotron" id="CertificationsMultipleView"></div>*@
 <br />
 <div class="jumbotron" id="ExperienceMultipleView"></div>
 <br />
@@ -173,12 +173,12 @@
 <script>
 
     $(document).ready(function () {
-        $.ajax({
+        @*$.ajax({
             url: "@Url.Action("CertificationsMultipleView", "CV")", success:function (result)
             {
                 $("#CertificationsMultipleView").html(result);
             }
-        })
+        })*@
         $.ajax({
             url: "@Url.Action("LanguageMultipleView", "CV")", success:function (result)
             {

@@ -18,7 +18,6 @@ namespace ProRecruit
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Candidate()
         {
-            this.CandidateCertifications = new HashSet<CandidateCertification>();
             this.CandidateExperiences = new HashSet<CandidateExperience>();
             this.CandidateJobs = new HashSet<CandidateJob>();
             this.CandidateLanguages = new HashSet<CandidateLanguage>();
@@ -73,8 +72,6 @@ namespace ProRecruit
         public virtual CareerLevel CareerLevel1 { get; set; }
         public virtual FunctionalArea FunctionalArea1 { get; set; }
         public virtual Industry Industry1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CandidateCertification> CandidateCertifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateExperience> CandidateExperiences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,7 +18,8 @@ namespace ProRecruit.Controllers
         // GET: CV
         public ActionResult Index()
         {
-            var cvs = db.Candidates.Include(c => c.CandidateCertifications).Include(c => c.CandidateExperiences).Include(c => c.CandidateJobs).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateQualifications).Include(c => c.CandidateSkills).ToList();
+            //var cvs = db.Candidates.Include(c => c.CandidateCertifications).Include(c => c.CandidateExperiences).Include(c => c.CandidateJobs).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateQualifications).Include(c => c.CandidateSkills).ToList();
+            var cvs = db.Candidates.Include(c => c.CandidateExperiences).Include(c => c.CandidateJobs).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateQualifications).Include(c => c.CandidateSkills).ToList();
             return View(cvs);
         }
 
@@ -39,7 +40,8 @@ namespace ProRecruit.Controllers
 
         public ActionResult DetailsById(string id)
         {
-            var cv = db.Candidates.Include(c => c.CandidateQualifications).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateSkills).Include(c => c.CandidateJobs).Include(c => c.CandidateCertifications).Include(c => c.CandidateExperiences).SingleOrDefault(c => c.UserId == id);
+            //var cv = db.Candidates.Include(c => c.CandidateQualifications).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateSkills).Include(c => c.CandidateJobs).Include(c => c.CandidateCertifications).Include(c => c.CandidateExperiences).SingleOrDefault(c => c.UserId == id);
+            var cv = db.Candidates.Include(c => c.CandidateQualifications).Include(c => c.CandidateLanguages).Include(c => c.CandidateProjects).Include(c => c.CandidateSkills).Include(c => c.CandidateJobs).Include(c => c.CandidateExperiences).SingleOrDefault(c => c.UserId == id);
 
             if (cv == null)
             {
@@ -106,6 +108,7 @@ namespace ProRecruit.Controllers
         {
             int _id = Convert.ToInt32(id);
             List<SelectListItem> types = new List<SelectListItem>();
+            //types.Add(new SelectListItem { Text = "Select One", Value = "" });
             var fetchTypes = db.QualificationTypes.Where(ft => ft.TypeOf == _id).ToList();
             for (int i = 0; i < fetchTypes.Count; i++)
             {
@@ -274,45 +277,45 @@ namespace ProRecruit.Controllers
             return View(SkillsAdded);
         }
 
-        [Authorize]
-        public ActionResult AddCandidateCertifications()
-        {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult AddCandidateCertifications()
+        //{
+        //    ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+        //    return View();
+        //}
 
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddCandidateCertifications(CandidateCertification cc)
-        {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", cc.UserId);
-            string id = User.Identity.GetUserId();
-            cc.UserId = id;
-            if (ModelState.IsValid)
-            {
-                if (cc.Id > 0)
-                {
-                    db.Entry(cc).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    db.CandidateCertifications.Add(cc);
-                    db.SaveChanges();
-                }
-            }
-            return View(cc);
-        }
+        //[HttpPost]
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddCandidateCertifications(CandidateCertification cc)
+        //{
+        //    ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", cc.UserId);
+        //    string id = User.Identity.GetUserId();
+        //    cc.UserId = id;
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (cc.Id > 0)
+        //        {
+        //            db.Entry(cc).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //        }
+        //        else
+        //        {
+        //            db.CandidateCertifications.Add(cc);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    return View(cc);
+        //}
 
-        public ActionResult CertificationsMultipleView()
-        {
-            string id = User.Identity.GetUserId();
-            var certificationsAdded = (from r in db.CandidateCertifications
-                                       where r.UserId.Equals(id)
-                                       select r);
-            return View(certificationsAdded);
-        }
+        //public ActionResult CertificationsMultipleView()
+        //{
+        //    string id = User.Identity.GetUserId();
+        //    var certificationsAdded = (from r in db.CandidateCertifications
+        //                               where r.UserId.Equals(id)
+        //                               select r);
+        //    return View(certificationsAdded);
+        //}
 
         [Authorize]
         public ActionResult AddCandidateExperience()

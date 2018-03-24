@@ -12,7 +12,7 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class CandidateQualification
     {
         public int Id { get; set; }
@@ -46,6 +46,8 @@ namespace ProRecruit
         public Nullable<int> DegreeLevel { get; set; }
         [Display(Name = "Degree Type")]
         public Nullable<int> DegreeType { get; set; }
+        [Display(Name = "Result Status")]
+        public string ResultStatus { get; set; }
 
         public virtual Candidate Candidate { get; set; }
         public virtual Qualification Qualification { get; set; }

@@ -46,7 +46,7 @@ namespace ProRecruit.Controllers
         {
             string viewBagJobId = Request["JobId"].ToString();
             //ViewBag.Trigger = Request.Form["JobId"];
-            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", jq.QualificationId);
+            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", jq.DegreeLevel);
             
             if (ModelState.IsValid)
             {

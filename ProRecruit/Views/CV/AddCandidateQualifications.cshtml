@@ -13,7 +13,7 @@
     <div class="form-horizontal">
         <hr />
         <p>
-            @Html.ActionLink("Next Step", "AddCandidateCertifications", "CV", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Next Step", "AddCandidateSkills", "CV", null, new { @class = "btn btn-primary" })
         </p>
         <div id="multipleView"></div>
         @{
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="divDegreeType" class="form-group hidden">
             @Html.LabelFor(model => model.DegreeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="DegreeType" class="form-control"></select>
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="divResultType" class="form-group hidden">
             @Html.LabelFor(model => model.ResultType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ResultType, new List<SelectListItem>
@@ -156,6 +156,18 @@
             </div>
         </div>
 
+        <div id="divResultStatus" class="form-group hidden">
+            @Html.LabelFor(model => model.ResultStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="ddlResultStatus" class="form-control">
+                    <option value="">Select One</option>
+                    <option value="Completed" dir="ltr">Completed</option>
+                    <option value="Incomplete" dir="ltr">Incomplete</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.ResultStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         @Html.HiddenFor(model => model.City, new { id = "hiddenCity" })
         @Html.HiddenFor(model => model.Country, new { id = "hiddenCountry" })
         @Html.HiddenFor(model => model.DegreeType, new { id = "hiddenDegreeType" })
@@ -164,6 +176,7 @@
         @Html.HiddenFor(model => model.TotalGPA, new { id = "hiddenTotalGPA" })
         @Html.HiddenFor(model => model.YourGPA, new { id = "hiddenYourGPA" })
         @Html.HiddenFor(model => model.TotalPercentage, new { id = "hiddenTotalPercentage" })
+        @Html.HiddenFor(model => model.ResultStatus, new { id = "hiddenResultStatus" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -288,6 +301,7 @@
         var valTotalGPA = $("#ddlTotalGPA").val();
         var valYourGPA = $("#ddlYourGPA").val();
         var valTotalPercentage = $("#ddlTotalPercentage").val();
+        var valResultStatus = $("#ddlResultStatus").val();
 
         $("#hiddenCity").val(valCity);
         $("#hiddenCountry").val(valCountry);
@@ -297,9 +311,63 @@
         $("#hiddenTotalGPA").val(valTotalGPA);
         $("#hiddenYourGPA").val(valYourGPA);
         $("#hiddenTotalPercentage").val(valTotalPercentage);
+        $("#hiddenResultStatus").val(valResultStatus);
     });
 
+    function CheckForResultStaus() {
+        var valQualificationLevel = $("#DegreeLevelId :selected").text();
+        if (valQualificationLevel == 'Non-Matriculation') {
+            $("#divResultStatus").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Certification') {
+            $("#divResultStatus").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Diploma') {
+            $("#divResultStatus").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Short Course') {
+            $("#divResultStatus").removeClass('hidden');
+        }
+    }
+
+    function CheckForResultType() {
+        var valQualificationLevel = $("#DegreeLevelId :selected").text();
+        if (valQualificationLevel == 'Matriculation/O-Level') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Intermediate/A-Level') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Bachelors') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'Masters') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'MPhil/MS') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+        if (valQualificationLevel == 'PHD/Doctorate') {
+            $("#divDegreeType").removeClass('hidden');
+            $("#divResultType").removeClass('hidden');
+        }
+    }
+
     $("#DegreeLevelId").change(function () {
+        $("#divDegreeType").addClass('hidden');
+        $("#divResultType").addClass('hidden');
+        $("#divResultStatus").addClass('hidden');
+        $("#divTotalGpa").addClass('hidden');
+        $("#divYourGPA").addClass('hidden');
+        $("#divTotalPercentage").addClass('hidden');
+        $("#divTotalGrade").addClass('hidden');
+        CheckForResultStaus();
+        CheckForResultType();
         //var qualificationId = $("#QualificationId :selected").text();
         var qualificationId = $("#DegreeLevelId").val();
         var ddlQualificationTypes = $("#DegreeType");
@@ -311,16 +379,10 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                //if (!$.trim(data))
-                //{
-                //    $("#DegreeType").prop("disabled", true);
-                //}
-                //else {
-                    ddlQualificationTypes.empty().append('<option selected="selected" value="0">Please select</option>');
-                    $.each(response, function () {
-                        ddlQualificationTypes.append($("<option></option>").val(this['Value']).html(this['Text']));
-                    });
-                //}
+                ddlQualificationTypes.empty().append('<option selected="selected" value="0">Please select</option>');
+                $.each(response, function () {
+                    ddlQualificationTypes.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
             },
             failure: function (response) {
                 alert(response.responseText);
