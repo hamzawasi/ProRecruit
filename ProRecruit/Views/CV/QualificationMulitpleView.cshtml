@@ -19,10 +19,10 @@ else
                 @Html.DisplayNameFor(model => model.DateCompleted)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DegreeLevel)
+                @Html.DisplayNameFor(model => model.Qualification.QualificationName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DegreeType)
+                @Html.DisplayNameFor(model => model.QualificationType.TypeName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Degreetitle)
@@ -54,9 +54,6 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.YourGPA)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Qualification.QualificationName)
-            </th>
             <th></th>
         </tr>
 
@@ -67,10 +64,10 @@ else
                     @Html.DisplayFor(modelItem => item.DateCompleted)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DegreeLevel)
+                    @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DegreeType)
+                    @Html.DisplayFor(modelItem => item.QualificationType.TypeName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Degreetitle)
@@ -101,9 +98,6 @@ else
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.YourGPA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })

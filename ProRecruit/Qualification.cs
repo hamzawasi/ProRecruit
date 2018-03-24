@@ -11,6 +11,7 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Qualification
     {
@@ -23,6 +24,7 @@ namespace ProRecruit
         }
     
         public int Id { get; set; }
+        [Display(Name = "Degree Level")]
         public string QualificationName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

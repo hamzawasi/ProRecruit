@@ -52,26 +52,8 @@ namespace ProRecruit.Controllers
         [Authorize]
         public ActionResult AddCandidateQualifications()
         {
-            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName");
+            ViewBag.DegreeLevelId = new SelectList(db.Qualifications, "Id", "QualificationName");
             return View();
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public JsonResult GetTypesByQualification(string id)
-        {
-            int _id = Convert.ToInt32(id);
-            List<SelectListItem> types = new List<SelectListItem>();
-            var fetchTypes = db.QualificationTypes.Where(ft => ft.TypeOf == _id).ToList();
-            for (int i = 0; i < fetchTypes.Count; i++)
-            {
-                types.Add(new SelectListItem
-                {
-                    Value = fetchTypes[i].Id.ToString(),
-                    Text = fetchTypes[i].TypeName
-                });
-            }
-            return Json(types);
         }
 
         [HttpPost]
@@ -79,10 +61,12 @@ namespace ProRecruit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddCandidateQualifications(CandidateQualification cq)
         {
-            ViewBag.QualificationId = new SelectList(db.Qualifications, "Id", "QualificationName", cq.DegreeLevel);
+            ViewBag.DegreeLevelId = new SelectList(db.Qualifications, "Id", "QualificationName", cq.DegreeLevel);
 
             string id = User.Identity.GetUserId();
             cq.UserId = id;
+            //DateTime? dateCompleted = DateTime.Parse(cq.DateCompleted.Value.Year.ToString());
+            //cq.DateCompleted = dateCompleted;
             if (ModelState.IsValid)
             {
                 try
@@ -115,6 +99,136 @@ namespace ProRecruit.Controllers
                          where r.UserId.Equals(id)
                          select r).ToList();
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult GetTypesByQualification(string id)
+        {
+            int _id = Convert.ToInt32(id);
+            List<SelectListItem> types = new List<SelectListItem>();
+            var fetchTypes = db.QualificationTypes.Where(ft => ft.TypeOf == _id).ToList();
+            for (int i = 0; i < fetchTypes.Count; i++)
+            {
+                types.Add(new SelectListItem
+                {
+                    Value = fetchTypes[i].Id.ToString(),
+                    Text = fetchTypes[i].TypeName
+                });
+            }
+            return Json(types);
+        }
+
+        [HttpPost]
+        public JsonResult ReturnValuesOfGPA4()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            #region interestingApproach
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    for (int j = 0; j < 9; j++)
+            //    {
+            //        values.Add(new SelectListItem
+            //        {
+            //            Value = j.ToString(),
+            //            Text = j.ToString()
+            //        });
+            //    }
+            //}
+            #endregion
+            values.Add(new SelectListItem { Value = "1.0", Text = "1.0" });
+            values.Add(new SelectListItem { Value = "1.1", Text = "1.1" });
+            values.Add(new SelectListItem { Value = "1.2", Text = "1.2" });
+            values.Add(new SelectListItem { Value = "1.3", Text = "1.3" });
+            values.Add(new SelectListItem { Value = "1.4", Text = "1.4" });
+            values.Add(new SelectListItem { Value = "1.5", Text = "1.5" });
+            values.Add(new SelectListItem { Value = "1.6", Text = "1.6" });
+            values.Add(new SelectListItem { Value = "1.7", Text = "1.7" });
+            values.Add(new SelectListItem { Value = "1.8", Text = "1.8" });
+            values.Add(new SelectListItem { Value = "1.9", Text = "1.9" });
+            values.Add(new SelectListItem { Value = "2.0", Text = "2.0" });
+            values.Add(new SelectListItem { Value = "2.1", Text = "2.1" });
+            values.Add(new SelectListItem { Value = "2.2", Text = "2.2" });
+            values.Add(new SelectListItem { Value = "2.3", Text = "2.3" });
+            values.Add(new SelectListItem { Value = "2.4", Text = "2.4" });
+            values.Add(new SelectListItem { Value = "2.5", Text = "2.5" });
+            values.Add(new SelectListItem { Value = "2.6", Text = "2.6" });
+            values.Add(new SelectListItem { Value = "2.7", Text = "2.7" });
+            values.Add(new SelectListItem { Value = "2.8", Text = "2.8" });
+            values.Add(new SelectListItem { Value = "2.9", Text = "2.9" });
+            values.Add(new SelectListItem { Value = "3.0", Text = "3.0" });
+            values.Add(new SelectListItem { Value = "3.1", Text = "3.1" });
+            values.Add(new SelectListItem { Value = "3.2", Text = "3.2" });
+            values.Add(new SelectListItem { Value = "3.3", Text = "3.3" });
+            values.Add(new SelectListItem { Value = "3.4", Text = "3.4" });
+            values.Add(new SelectListItem { Value = "3.5", Text = "3.5" });
+            values.Add(new SelectListItem { Value = "3.6", Text = "3.6" });
+            values.Add(new SelectListItem { Value = "3.7", Text = "3.7" });
+            values.Add(new SelectListItem { Value = "3.8", Text = "3.8" });
+            values.Add(new SelectListItem { Value = "3.9", Text = "3.9" });
+            values.Add(new SelectListItem { Value = "4.0", Text = "4.0" });
+            return Json(values);
+        }
+
+        [HttpPost]
+        public JsonResult ReturnValuesOfGPA5()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            values.Add(new SelectListItem { Value = "1.0", Text = "1.0" });
+            values.Add(new SelectListItem { Value = "1.1", Text = "1.1" });
+            values.Add(new SelectListItem { Value = "1.2", Text = "1.2" });
+            values.Add(new SelectListItem { Value = "1.3", Text = "1.3" });
+            values.Add(new SelectListItem { Value = "1.4", Text = "1.4" });
+            values.Add(new SelectListItem { Value = "1.5", Text = "1.5" });
+            values.Add(new SelectListItem { Value = "1.6", Text = "1.6" });
+            values.Add(new SelectListItem { Value = "1.7", Text = "1.7" });
+            values.Add(new SelectListItem { Value = "1.8", Text = "1.8" });
+            values.Add(new SelectListItem { Value = "1.9", Text = "1.9" });
+            values.Add(new SelectListItem { Value = "2.0", Text = "2.0" });
+            values.Add(new SelectListItem { Value = "2.1", Text = "2.1" });
+            values.Add(new SelectListItem { Value = "2.2", Text = "2.2" });
+            values.Add(new SelectListItem { Value = "2.3", Text = "2.3" });
+            values.Add(new SelectListItem { Value = "2.4", Text = "2.4" });
+            values.Add(new SelectListItem { Value = "2.5", Text = "2.5" });
+            values.Add(new SelectListItem { Value = "2.6", Text = "2.6" });
+            values.Add(new SelectListItem { Value = "2.7", Text = "2.7" });
+            values.Add(new SelectListItem { Value = "2.8", Text = "2.8" });
+            values.Add(new SelectListItem { Value = "2.9", Text = "2.9" });
+            values.Add(new SelectListItem { Value = "3.0", Text = "3.0" });
+            values.Add(new SelectListItem { Value = "3.1", Text = "3.1" });
+            values.Add(new SelectListItem { Value = "3.2", Text = "3.2" });
+            values.Add(new SelectListItem { Value = "3.3", Text = "3.3" });
+            values.Add(new SelectListItem { Value = "3.4", Text = "3.4" });
+            values.Add(new SelectListItem { Value = "3.5", Text = "3.5" });
+            values.Add(new SelectListItem { Value = "3.6", Text = "3.6" });
+            values.Add(new SelectListItem { Value = "3.7", Text = "3.7" });
+            values.Add(new SelectListItem { Value = "3.8", Text = "3.8" });
+            values.Add(new SelectListItem { Value = "3.9", Text = "3.9" });
+            values.Add(new SelectListItem { Value = "4.0", Text = "4.0" });
+            values.Add(new SelectListItem { Value = "4.1", Text = "4.1" });
+            values.Add(new SelectListItem { Value = "4.2", Text = "4.2" });
+            values.Add(new SelectListItem { Value = "4.3", Text = "4.3" });
+            values.Add(new SelectListItem { Value = "4.4", Text = "4.4" });
+            values.Add(new SelectListItem { Value = "4.5", Text = "4.5" });
+            values.Add(new SelectListItem { Value = "4.6", Text = "4.6" });
+            values.Add(new SelectListItem { Value = "4.7", Text = "4.7" });
+            values.Add(new SelectListItem { Value = "4.8", Text = "4.8" });
+            values.Add(new SelectListItem { Value = "4.9", Text = "4.9" });
+            values.Add(new SelectListItem { Value = "5.0", Text = "5.0" });
+            return Json(values);
+        }
+
+        [HttpPost]
+        public JsonResult RetrunValuesOfPercentage()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            for (int i = 40; i < 101; i++)
+            {
+                values.Add(new SelectListItem {
+                    Value = i.ToString(),
+                    Text = i.ToString()
+                });
+            }
+            return Json(values);
         }
 
         [Authorize]

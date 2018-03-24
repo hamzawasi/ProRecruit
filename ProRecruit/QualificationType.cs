@@ -11,6 +11,7 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class QualificationType
     {
@@ -21,6 +22,7 @@ namespace ProRecruit
         }
     
         public int Id { get; set; }
+        [Display(Name ="Degree Type")]
         public string TypeName { get; set; }
         public Nullable<int> TypeOf { get; set; }
     
