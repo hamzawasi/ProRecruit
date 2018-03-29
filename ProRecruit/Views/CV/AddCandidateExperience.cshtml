@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add Experience</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,7 +13,7 @@
 
         <hr />
         <p>
-            @Html.ActionLink("Next Step", "AddCandidateLanguage", "CV", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Next Step", "AddCandidateProject", "CV", null, new { @class = "btn btn-primary" })
         </p>
         <div id="multipleView"></div>
         <h2>Add Your Experience:</h2>
@@ -45,10 +43,10 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id ="divToDate"class="form-group">
             @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ToDate, new { htmlAttributes = new { @class = "date-picker" } })
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,30 +54,40 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="Country" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">State</label>
+            <div class="col-md-10">
+                <select id="State" class="form-control"></select>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="City" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+        <div class="form-group">
+            <label class="control-label col-md-2">Ongoing</label>
+            <div class="col-md-10">
+                <input id="Ongoing" type="checkbox" class="form-control"/>
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.City, new { id = "hiddenCity" })
+        @Html.HiddenFor(model => model.Country, new { id = "hiddenCountry" })
+        @Html.HiddenFor(model => model.Ongoing, new { id = "hiddenOngoing" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="Create" value="Create" class="btn btn-default" />
 
             </div>
         </div>
@@ -88,6 +96,9 @@
 
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+
+    var ongoing;
+
     $(document).ready(function () {
         $.ajax({
 
@@ -95,8 +106,79 @@
             {
                 $("#multipleView").html(result);
             }
-
-
+        })
+        GetCountries();
+        GetStates();
+        GetCities();
     })
+
+    $("#Create").click(function () {
+        var valCity = $("#City :selected").text();
+        var valCountry = $("#Country :selected").text();
+
+        $("#hiddenCity").val(valCity);
+        $("#hiddenCountry").val(valCountry);
+        $("#hiddenOngoing").val(ongoing);
+    });
+
+    $("#Ongoing").change(function () {
+        if (this.checked) {
+            ongoing = true;
+            $("#divToDate").addClass('hidden');
+        }
+        else {
+            $("#divToDate").removeClass('hidden');
+            ongoing = false;
+        }
     })
+
+    function GetCountries() {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&style=full&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $("#Country").empty();
+                $("#Country").append($('<option />', { value: -1, text: 'Select Country' }));
+                $(data.geonames).each(function (index, item) {
+                    $("#Country").append($('<option />', { value: item.geonameId, text: item.countryName }));
+                });
+            },
+            error: function (data) {
+                alert("Failed to get countries.");
+            }
+        });
+    }
+
+    function GetStates() {
+        $("#Country").change(function () {
+            GetChildren($(this).val(), "State", $("#State"));
+        });
+    }
+
+    function GetCities() {
+        $("#State").change(function () {
+            GetChildren($(this).val(), "City", $("#City"));
+        });
+    };
+
+    function GetChildren(geoNameId, childType, ddlSelector) {
+        $.ajax({
+            type: "GET",
+            url: "http://api.geonames.org/childrenJSON?geonameId=" + geoNameId + "&username=hamzaws9",
+            contentType: "application/json; charset=utf-8",
+            dataType: "jsonp",
+            success: function (data) {
+                $(ddlSelector).empty();
+                $(ddlSelector).append($('<option />', { value: -1, text: 'Select ' + childType }));
+                $(data.geonames).each(function (index, item) {
+                    $(ddlSelector).append($('<option />', { value: item.geonameId, text: item.name }));
+                });
+            },
+            error: function (data) {
+                alert("failed to get data");
+            }
+        });
+    }
 </script>

@@ -16,12 +16,75 @@
             @Html.ActionLink("Your Profile Is Complete, Click Here To Continue", "Dashboard", "Candidates", null, new { @class = "btn btn-primary" })
         </p>
         <div id="multipleView"></div>
-        <h2>Add Your Languages:</h2>
+        <br />
+        <h2>Add Your Languages</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.LanguageTitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LanguageTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.LanguageTitle, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Choose Language"},
+                        new SelectListItem { Text = "African", Value = "African" },
+                        new SelectListItem { Text = "Albanian", Value = "Albanian" },
+                        new SelectListItem { Text = "Arabic", Value = "Arabic" },
+                        new SelectListItem { Text = "Armenian", Value = "Armenian" },
+                        new SelectListItem { Text = "Balochi", Value = "Balochi" },
+                        new SelectListItem { Text = "Belarusan", Value = "Belarusan" },
+                        new SelectListItem { Text = "Bosnian", Value = "Bosnian" },
+                        new SelectListItem { Text = "Bulgarian", Value = "Bulgarian" },
+                        new SelectListItem { Text = "Cantonese", Value = "Cantonese" },
+                        new SelectListItem { Text = "Catalan", Value = "Catalan" },
+                        new SelectListItem { Text = "Chinese", Value = "Chinese" },
+                        new SelectListItem { Text = "Czech", Value = "Czech" },
+                        new SelectListItem { Text = "Danish", Value = "Danish" },
+                        new SelectListItem { Text = "Dutch", Value = "Dutch" },
+                        new SelectListItem { Text = "English", Value = "English" },
+                        new SelectListItem { Text = "Estonian", Value = "Estonian" },
+                        new SelectListItem { Text = "Farsi", Value = "Farsi" },
+                        new SelectListItem { Text = "Finnish", Value = "Finnish" },
+                        new SelectListItem { Text = "Flemish", Value = "Flemish" },
+                        new SelectListItem { Text = "French", Value = "French" },
+                        new SelectListItem { Text = "Gaelic", Value = "Gaelic" },
+                        new SelectListItem { Text = "German", Value = "German" },
+                        new SelectListItem { Text = "Greek", Value = "Greek" },
+                        new SelectListItem { Text = "Gujerati", Value = "Gujerati" },
+                        new SelectListItem { Text = "Hebrew", Value = "Hebrew" },
+                        new SelectListItem { Text = "Hindi", Value = "Hindi" },
+                        new SelectListItem { Text = "Hungarian", Value = "Hungarian" },
+                        new SelectListItem { Text = "Icelandic", Value = "Icelandic" },
+                        new SelectListItem { Text = "Indonesian", Value = "Indonesian" },
+                        new SelectListItem { Text = "Italian", Value = "Italian" },
+                        new SelectListItem { Text = "Japanese", Value = "Japanese" },
+                        new SelectListItem { Text = "Korean", Value = "Korean" },
+                        new SelectListItem { Text = "Latvian", Value = "Latvian" },
+                        new SelectListItem { Text = "Lithuanian", Value = "Lithuanian" },
+                        new SelectListItem { Text = "Luxembourgeois", Value = "Luxembourgeois" },
+                        new SelectListItem { Text = "Macedonian", Value = "Macedonian" },
+                        new SelectListItem { Text = "Malay", Value = "Malay" },
+                        new SelectListItem { Text = "Mandarin", Value = "Mandarin" },
+                        new SelectListItem { Text = "Norwegian", Value = "Norwegian" },
+                        new SelectListItem { Text = "Pashto", Value = "Pashto" },
+                        new SelectListItem { Text = "Portuguese", Value = "Portuguese" },
+                        new SelectListItem { Text = "Punjabi", Value = "Punjabi" },
+                        new SelectListItem { Text = "Romanian", Value = "Romanian" },
+                        new SelectListItem { Text = "Russian", Value = "Russian" },
+                        new SelectListItem { Text = "Saraiki", Value = "Saraiki" },
+                        new SelectListItem { Text = "Serbian", Value = "Serbian" },
+                        new SelectListItem { Text = "Sindhi", Value = "Sindhi" },
+                        new SelectListItem { Text = "Slovak", Value = "Slovak" },
+                        new SelectListItem { Text = "Slovenian", Value = "Slovenian" },
+                        new SelectListItem { Text = "Spanish", Value = "Spanish" },
+                        new SelectListItem { Text = "Swedish", Value = "Spanish" },
+                        new SelectListItem { Text = "Swiss French", Value = "Swiss French" },
+                        new SelectListItem { Text = "Swiss German", Value = "Swiss German" },
+                        new SelectListItem { Text = "Tamil", Value = "Tamil" },
+                        new SelectListItem { Text = "Thai", Value = "Thai" },
+                        new SelectListItem { Text = "Turkish", Value = "Turkish" },
+                        new SelectListItem { Text = "Ukranian", Value = "Ukranian" },
+                        new SelectListItem { Text = "Urdu", Value = "Urdu" },
+                        new SelectListItem { Text = "Welsh", Value = "Welsh" }
+                    }, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LanguageTitle, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -29,18 +92,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProficiencyWithLanguage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProficiencyWithLanguage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ProficiencyWithLanguage, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Choose Language"},
+                        new SelectListItem { Text = "Beginner", Value = "Beginner" },
+                        new SelectListItem { Text = "Intermediate", Value = "Intermediate" },
+                        new SelectListItem { Text = "Expert", Value = "Expert" }
+                    }, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ProficiencyWithLanguage, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -48,9 +109,6 @@
             </div>
         </div>
 
-        @*<p>
-            @Html.ActionLink("Now you are done! Click here to continue", "Index", "Home", null, new { @class = "btn btn-primary" })
-        </p>*@
     </div>
 }
 
@@ -63,7 +121,7 @@
             {
                 $("#multipleView").html(result);
             }
-    })
+        })
     })
 </script>
 <div>

@@ -238,6 +238,7 @@ namespace ProRecruit.Controllers
         public ActionResult AddCandidateSkills()
         {
             ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName");
+            ViewBag.SkillExperienceId = new SelectList(db.SkillExperiences, "Id", "Experience");
             return View();
         }
 
@@ -247,7 +248,8 @@ namespace ProRecruit.Controllers
         public ActionResult AddCandidateSkills(CandidateSkill cs)
         {
             ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName", cs.SkillId);
-            
+            ViewBag.SkillExperienceId = new SelectList(db.SkillExperiences, "Id", "Experience", cs.Experience);
+
             string id = User.Identity.GetUserId();
             cs.UserId = id;
 
@@ -263,6 +265,12 @@ namespace ProRecruit.Controllers
                     db.CandidateSkills.Add(cs);
                     db.SaveChanges();
                 }
+            }
+            else
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                       .Where(y => y.Count > 0)
+                       .ToList();
             }
             return View(cs);
         }

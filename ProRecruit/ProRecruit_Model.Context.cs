@@ -47,6 +47,7 @@ namespace ProRecruit
         public virtual DbSet<Qualification> Qualifications { get; set; }
         public virtual DbSet<QualificationType> QualificationTypes { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<SkillExperience> SkillExperiences { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

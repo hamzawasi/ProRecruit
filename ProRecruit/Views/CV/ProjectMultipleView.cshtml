@@ -1,15 +1,15 @@
-﻿@model IEnumerable<ProRecruit.CandidateSkill>
+﻿@model IEnumerable<ProRecruit.CandidateProject>
 
 @{
-    ViewBag.Title = "SkillMulitpleView";
+    ViewBag.Title = "ProjectMulitpleView";
 
 }
 
-<h2>Your Skills</h2>
+<h2>Your Projects</h2>
 
 @if (!Model.Any())
 {
-    <p>You havent added any Skills yet</p>
+    <p>You havent added any Projects yet</p>
 }
 
 else
@@ -17,10 +17,10 @@ else
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Skill.SkillName)
+                @Html.DisplayNameFor(model => model.ProjectTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SkillExperience.Experience)
+                @Html.DisplayNameFor(model => model.ProjectDescription)
             </th>
             <th></th>
         </tr>
@@ -29,10 +29,10 @@ else
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Skill.SkillName)
+                    @Html.DisplayFor(modelItem => item.ProjectTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SkillExperience.Experience)
+                    @Html.DisplayFor(modelItem => item.ProjectDescription)
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
@@ -43,3 +43,4 @@ else
     </table>
 
 }
+

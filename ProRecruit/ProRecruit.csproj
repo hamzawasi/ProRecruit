@@ -264,6 +264,9 @@
     <Compile Include="Skill.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SkillExperience.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
@@ -362,7 +365,6 @@
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\CV\AddCandidateQualifications.cshtml" />
-    <Content Include="Views\CV\QualificationMulitpleView.cshtml" />
     <Content Include="Views\CV\AddCandidateCertifications.cshtml" />
     <Content Include="Views\CV\CertificationsMultipleView.cshtml" />
     <Content Include="Views\CV\AddCandidateSkills.cshtml" />
@@ -383,6 +385,9 @@
     <Content Include="Views\Jobs\QualificationMulitpleView.cshtml" />
     <Content Include="Views\Jobs\AddJobSkills.cshtml" />
     <Content Include="Views\Jobs\SkillMulitpleView.cshtml" />
+    <Content Include="Views\CV\QualificationMulitpleView.cshtml" />
+    <Content Include="Views\CV\AddCandidateProject.cshtml" />
+    <Content Include="Views\CV\ProjectMultipleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

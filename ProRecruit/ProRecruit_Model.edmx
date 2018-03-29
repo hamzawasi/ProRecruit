@@ -105,6 +105,7 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="OrganizationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ongoing" Type="bit" />
         </EntityType>
         <EntityType Name="CandidateJob">
           <Key>
@@ -163,8 +164,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillId" Type="int" Nullable="false" />
-          <Property Name="ExperienceWithSkill" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Experience" Type="int" />
         </EntityType>
         <EntityType Name="CareerLevel">
           <Key>
@@ -228,7 +229,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JobId" Type="int" Nullable="false" />
           <Property Name="SkillId" Type="int" />
-          <Property Name="ReqYearsOfExperience" Type="nvarchar" MaxLength="50" />
+          <Property Name="Experience" Type="int" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -268,6 +269,13 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="SkillExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Experience" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -447,6 +455,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CandidateSkills_SkillExperience">
+          <End Role="SkillExperience" Type="Self.SkillExperience" Multiplicity="0..1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillExperience">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="Experience" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -551,6 +571,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobSkills_SkillExperience">
+          <End Role="SkillExperience" Type="Self.SkillExperience" Multiplicity="0..1" />
+          <End Role="JobSkills" Type="Self.JobSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillExperience">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="Experience" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Organization_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
@@ -599,6 +631,7 @@
           <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QualificationType" EntityType="Self.QualificationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkillExperience" EntityType="Self.SkillExperience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
             <End Role="Skill" EntitySet="Skill" />
@@ -656,6 +689,10 @@
             <End Role="Candidate" EntitySet="Candidate" />
             <End Role="CandidateSkills" EntitySet="CandidateSkills" />
           </AssociationSet>
+          <AssociationSet Name="FK_CandidateSkills_SkillExperience" Association="Self.FK_CandidateSkills_SkillExperience">
+            <End Role="SkillExperience" EntitySet="SkillExperience" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -686,6 +723,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
             <End Role="Skill" EntitySet="Skill" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_SkillExperience" Association="Self.FK_JobSkills_SkillExperience">
+            <End Role="SkillExperience" EntitySet="SkillExperience" />
             <End Role="JobSkills" EntitySet="JobSkills" />
           </AssociationSet>
           <AssociationSet Name="FK_Organization_AspNetUsers" Association="Self.FK_Organization_AspNetUsers">
@@ -812,6 +853,7 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OrganizationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ongoing" Type="Boolean" />
           <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateExperience_Candidate" FromRole="CandidateExperience" ToRole="Candidate" />
         </EntityType>
         <EntityType Name="CandidateJob">
@@ -878,10 +920,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SkillId" Type="Int32" Nullable="false" />
-          <Property Name="ExperienceWithSkill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="Int32" />
           <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="CandidateSkills" ToRole="Candidate" />
           <NavigationProperty Name="Skill" Relationship="Self.CandidateSkills_SkillId_FK" FromRole="CandidateSkills" ToRole="Skill" />
+          <NavigationProperty Name="SkillExperience" Relationship="Self.FK_CandidateSkills_SkillExperience" FromRole="CandidateSkills" ToRole="SkillExperience" />
         </EntityType>
         <EntityType Name="CareerLevel">
           <Key>
@@ -953,9 +996,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="JobId" Type="Int32" Nullable="false" />
           <Property Name="SkillId" Type="Int32" />
-          <Property Name="ReqYearsOfExperience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="Int32" />
           <NavigationProperty Name="Job" Relationship="Self.FK_JobSkills_Job" FromRole="JobSkills" ToRole="Job" />
           <NavigationProperty Name="Skill" Relationship="Self.FK_JobSkills_Skill" FromRole="JobSkills" ToRole="Skill" />
+          <NavigationProperty Name="SkillExperience" Relationship="Self.FK_JobSkills_SkillExperience" FromRole="JobSkills" ToRole="SkillExperience" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -1003,6 +1047,15 @@
           <Property Name="SkillName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateSkills" Relationship="Self.CandidateSkills_SkillId_FK" FromRole="Skill" ToRole="CandidateSkills" />
           <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_Skill" FromRole="Skill" ToRole="JobSkills" />
+        </EntityType>
+        <EntityType Name="SkillExperience">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Experience" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CandidateSkills" Relationship="Self.FK_CandidateSkills_SkillExperience" FromRole="SkillExperience" ToRole="CandidateSkills" />
+          <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_SkillExperience" FromRole="SkillExperience" ToRole="JobSkills" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1222,6 +1275,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CandidateSkills_SkillExperience">
+          <End Role="SkillExperience" Type="Self.SkillExperience" Multiplicity="0..1" />
+          <End Role="CandidateSkills" Type="Self.CandidateSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillExperience">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSkills">
+              <PropertyRef Name="Experience" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Job_Organization1">
           <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
           <End Role="Job" Type="Self.Job" Multiplicity="*" />
@@ -1270,6 +1335,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobSkills_SkillExperience">
+          <End Role="SkillExperience" Type="Self.SkillExperience" Multiplicity="0..1" />
+          <End Role="JobSkills" Type="Self.JobSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillExperience">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobSkills">
+              <PropertyRef Name="Experience" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_QualificationType_Qualification">
           <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
           <End Role="QualificationType" Type="Self.QualificationType" Multiplicity="*" />
@@ -1309,6 +1386,7 @@
           <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
           <EntitySet Name="QualificationTypes" EntityType="Self.QualificationType" />
           <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="SkillExperiences" EntityType="Self.SkillExperience" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1378,6 +1456,10 @@
             <End Role="Skill" EntitySet="Skills" />
             <End Role="CandidateSkills" EntitySet="CandidateSkills" />
           </AssociationSet>
+          <AssociationSet Name="FK_CandidateSkills_SkillExperience" Association="Self.FK_CandidateSkills_SkillExperience">
+            <End Role="SkillExperience" EntitySet="SkillExperiences" />
+            <End Role="CandidateSkills" EntitySet="CandidateSkills" />
+          </AssociationSet>
           <AssociationSet Name="FK_Job_Organization1" Association="Self.FK_Job_Organization1">
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Job" EntitySet="Jobs" />
@@ -1392,6 +1474,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
             <End Role="Skill" EntitySet="Skills" />
+            <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSkills_SkillExperience" Association="Self.FK_JobSkills_SkillExperience">
+            <End Role="SkillExperience" EntitySet="SkillExperiences" />
             <End Role="JobSkills" EntitySet="JobSkills" />
           </AssociationSet>
           <AssociationSet Name="FK_QualificationType_Qualification" Association="Self.FK_QualificationType_Qualification">
@@ -1503,6 +1589,7 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="Ongoing" ColumnName="Ongoing" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1566,8 +1653,8 @@
               <MappingFragment StoreEntitySet="CandidateSkills">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
-                <ScalarProperty Name="ExperienceWithSkill" ColumnName="ExperienceWithSkill" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1637,7 +1724,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
-                <ScalarProperty Name="ReqYearsOfExperience" ColumnName="ReqYearsOfExperience" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1681,6 +1768,14 @@
               <MappingFragment StoreEntitySet="Skill">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillExperiences">
+            <EntityTypeMapping TypeName="ProRecruit.SkillExperience">
+              <MappingFragment StoreEntitySet="SkillExperience">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

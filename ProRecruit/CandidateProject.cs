@@ -11,14 +11,24 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class CandidateProject
     {
         public int Id { get; set; }
+        [Display(Name = "Title")]
+        [Required(ErrorMessage = "Title is Required")]
         public string ProjectTitle { get; set; }
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "Description is Required")]
         public string ProjectDescription { get; set; }
+        [DataType(DataType.Url)]
         public string URL { get; set; }
+        [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> StartDate { get; set; }
+        [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> EndDate { get; set; }
         public string UserId { get; set; }
     

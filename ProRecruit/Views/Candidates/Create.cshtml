@@ -56,15 +56,15 @@
             @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MaritalStatus, new List<SelectListItem>
-            {
-                new SelectListItem{ Text = "Select One" },
-                new SelectListItem{ Text = "Married", Value = "Married" },
-                new SelectListItem{ Text = "Single", Value = "Single" },
-                new SelectListItem{ Text = "Divorced", Value = "Divorced" },
-                new SelectListItem{ Text = "Seperated", Value = "Seperated" },
-                new SelectListItem{ Text = "Widow/er", Value = "Widow" },
+                {
+                    new SelectListItem{ Text = "Select One" },
+                    new SelectListItem{ Text = "Married", Value = "Married" },
+                    new SelectListItem{ Text = "Single", Value = "Single" },
+                    new SelectListItem{ Text = "Divorced", Value = "Divorced" },
+                    new SelectListItem{ Text = "Seperated", Value = "Seperated" },
+                    new SelectListItem{ Text = "Widow/er", Value = "Widow" },
 
-            }, "", new { @class = "form-control" })
+                }, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
             </div>
         </div>

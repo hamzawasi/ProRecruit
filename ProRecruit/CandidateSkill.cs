@@ -16,10 +16,11 @@ namespace ProRecruit
     {
         public int Id { get; set; }
         public int SkillId { get; set; }
-        public string ExperienceWithSkill { get; set; }
         public string UserId { get; set; }
+        public Nullable<int> Experience { get; set; }
     
         public virtual Candidate Candidate { get; set; }
         public virtual Skill Skill { get; set; }
+        public virtual SkillExperience SkillExperience { get; set; }
     }
 }

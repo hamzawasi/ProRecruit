@@ -12,20 +12,21 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     
-    public partial class QualificationType
+    public partial class SkillExperience
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QualificationType()
+        public SkillExperience()
         {
-            this.CandidateQualifications = new HashSet<CandidateQualification>();
+            this.CandidateSkills = new HashSet<CandidateSkill>();
+            this.JobSkills = new HashSet<JobSkill>();
         }
     
         public int Id { get; set; }
-        public string TypeName { get; set; }
-        public Nullable<int> TypeOf { get; set; }
+        public string Experience { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CandidateQualification> CandidateQualifications { get; set; }
-        public virtual Qualification Qualification { get; set; }
+        public virtual ICollection<CandidateSkill> CandidateSkills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JobSkill> JobSkills { get; set; }
     }
 }

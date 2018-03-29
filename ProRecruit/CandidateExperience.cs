@@ -11,18 +11,30 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CandidateExperience
     {
         public int Id { get; set; }
+        [Display(Name = "Position Held")]
+        [Required(ErrorMessage = "Position Held is Required")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Only alphabets allowed")]
         public string PositionHeld { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "From")]
+        [Required(ErrorMessage = "From Date is Required")]
+        public System.DateTime FromDate { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Till")]
         public Nullable<System.DateTime> ToDate { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string UserId { get; set; }
         public string Description { get; set; }
+        [Display(Name = "Organization Name")]
+        [Required(ErrorMessage = "Organization Name is Required")]
         public string OrganizationName { get; set; }
+        public Nullable<bool> Ongoing { get; set; }
     
         public virtual Candidate Candidate { get; set; }
     }
