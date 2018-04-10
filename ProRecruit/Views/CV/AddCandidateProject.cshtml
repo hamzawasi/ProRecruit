@@ -83,7 +83,7 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "@Url.Action("ProjectMultipleView", "CV")", success:function (result)
+            url: "@Url.Action("ProjectsMultipleView", "CV")", success:function (result)
             {
                 $("#multipleView").html(result);
             }

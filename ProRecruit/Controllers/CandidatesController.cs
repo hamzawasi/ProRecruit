@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using ProRecruit.Models;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+using CrystalDecisions.Shared;
 
 namespace ProRecruit.Controllers
 {
@@ -41,6 +44,43 @@ namespace ProRecruit.Controllers
 				return HttpNotFound();
 			}
 			return View(candidate);
+		}
+
+		public ActionResult ExportCVToPDF()
+		{
+			ReportDocument rd = new ReportDocument();
+			ConnectionInfo crconnectioninfo = new ConnectionInfo();
+			TableLogOnInfos crtablelogoninfos = new TableLogOnInfos();
+			TableLogOnInfo crtablelogoninfo = new TableLogOnInfo();
+
+            Tables CrTables;
+
+            crconnectioninfo.ServerName = "DESKTOP-CQSA7LV";
+			crconnectioninfo.DatabaseName = "ProRecruit_Final";
+			crconnectioninfo.UserID = "sa";
+			crconnectioninfo.Password = "hamza1996";
+			
+			rd.Load(Path.Combine(Server.MapPath("~/Reports"), "CV.rpt"));
+			rd.SetParameterValue("userid", User.Identity.GetUserId().ToString());
+
+            CrTables = rd.Database.Tables;
+
+            foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
+            {
+                crtablelogoninfo = CrTable.LogOnInfo;
+                crtablelogoninfo.ConnectionInfo = crconnectioninfo;
+                CrTable.ApplyLogOnInfo(crtablelogoninfo);
+            }
+
+            //rd.Refresh();
+
+            Response.Buffer = false;
+			Response.ClearContent();
+			Response.ClearHeaders();
+			Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+			stream.Seek(0, SeekOrigin.Begin);
+            rd.Refresh();
+            return File(stream, "application/pdf", "CV.pdf");
 		}
 
 		//[Authorize]

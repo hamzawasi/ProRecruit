@@ -7,6 +7,8 @@
 
 <h2>Details</h2>
 
+<div><a href="@Url.Action("ExportCVToPDF")">Download PDF </a></div>  
+
 <div class="jumbotron">
     <h4>Candidate</h4>
     <hr />
@@ -154,8 +156,8 @@
 </div>
 
 <div class="jumbotron" id="QualificationMulitpleView"></div>
-@*<br />
-<div class="jumbotron" id="CertificationsMultipleView"></div>*@
+<br />
+<div class="jumbotron" id="ProjectMultipleView"></div>
 <br />
 <div class="jumbotron" id="ExperienceMultipleView"></div>
 <br />
@@ -173,12 +175,12 @@
 <script>
 
     $(document).ready(function () {
-        @*$.ajax({
-            url: "@Url.Action("CertificationsMultipleView", "CV")", success:function (result)
+        $.ajax({
+            url: "@Url.Action("ProjectsMultipleView", "CV")", success:function (result)
             {
-                $("#CertificationsMultipleView").html(result);
+                $("#ProjectMultipleView").html(result);
             }
-        })*@
+        })
         $.ajax({
             url: "@Url.Action("LanguageMultipleView", "CV")", success:function (result)
             {

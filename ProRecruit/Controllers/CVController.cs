@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ProRecruit;
 using Microsoft.AspNet.Identity;
+using System.IO;
+using System.Text;
+using iTextSharp.text;
 
 namespace ProRecruit.Controllers
 {
@@ -437,10 +440,10 @@ namespace ProRecruit.Controllers
         public ActionResult ProjectsMultipleView()
         {
             string id = User.Identity.GetUserId();
-            var LanguagesAdded = (from r in db.CandidateProjects
+            var projects = (from r in db.CandidateProjects
                                   where r.UserId.Equals(id)
                                   select r);
-            return View(LanguagesAdded);
+            return View(projects);
         }
 
         protected override void Dispose(bool disposing)
