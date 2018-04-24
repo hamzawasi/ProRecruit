@@ -53,9 +53,9 @@ namespace ProRecruit.Controllers
 			TableLogOnInfos crtablelogoninfos = new TableLogOnInfos();
 			TableLogOnInfo crtablelogoninfo = new TableLogOnInfo();
 
-            Tables CrTables;
+			Tables CrTables;
 
-            crconnectioninfo.ServerName = "DESKTOP-CQSA7LV";
+			crconnectioninfo.ServerName = "DESKTOP-CQSA7LV";
 			crconnectioninfo.DatabaseName = "ProRecruit_Final";
 			crconnectioninfo.UserID = "sa";
 			crconnectioninfo.Password = "hamza1996";
@@ -63,24 +63,24 @@ namespace ProRecruit.Controllers
 			rd.Load(Path.Combine(Server.MapPath("~/Reports"), "CV.rpt"));
 			rd.SetParameterValue("userid", User.Identity.GetUserId().ToString());
 
-            CrTables = rd.Database.Tables;
+			CrTables = rd.Database.Tables;
 
-            foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
-            {
-                crtablelogoninfo = CrTable.LogOnInfo;
-                crtablelogoninfo.ConnectionInfo = crconnectioninfo;
-                CrTable.ApplyLogOnInfo(crtablelogoninfo);
-            }
+			foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables)
+			{
+				crtablelogoninfo = CrTable.LogOnInfo;
+				crtablelogoninfo.ConnectionInfo = crconnectioninfo;
+				CrTable.ApplyLogOnInfo(crtablelogoninfo);
+			}
 
-            //rd.Refresh();
+			//rd.Refresh();
 
-            Response.Buffer = false;
+			Response.Buffer = false;
 			Response.ClearContent();
 			Response.ClearHeaders();
 			Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
 			stream.Seek(0, SeekOrigin.Begin);
-            rd.Refresh();
-            return File(stream, "application/pdf", "CV.pdf");
+			rd.Refresh();
+			return File(stream, "application/pdf", "CV.pdf");
 		}
 
 		//[Authorize]
@@ -178,7 +178,7 @@ namespace ProRecruit.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "FirstName,LastName,Email,DateOfBirth,Gender,MaritalStatus,Nationality,City,CNIC,CurrentAddress,Contact,Experience,Qualification,Industry,FunctionalArea,CurrentSalary,ExpectedSalary,CarreerLevel,UserId")] Candidate candidate)
+		public ActionResult Edit(Candidate candidate)
 		{
 			if (ModelState.IsValid)
 			{

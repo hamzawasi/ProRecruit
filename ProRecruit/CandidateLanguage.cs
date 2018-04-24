@@ -12,7 +12,7 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class CandidateLanguage
     {
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace ProRecruit
         [Display(Name = "Proficiency With Language")]
         public string ProficiencyWithLanguage { get; set; }
         public string UserId { get; set; }
-    
+
         public virtual Candidate Candidate { get; set; }
     }
 }

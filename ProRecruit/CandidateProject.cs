@@ -12,7 +12,7 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class CandidateProject
     {
         public int Id { get; set; }
@@ -31,7 +31,7 @@ namespace ProRecruit
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> EndDate { get; set; }
         public string UserId { get; set; }
-    
+
         public virtual Candidate Candidate { get; set; }
     }
 }

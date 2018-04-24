@@ -360,6 +360,22 @@ namespace ProRecruit.Controllers
             return View(ce);
         }
 
+        public int GetCandidateExperience(string id)
+        {
+            int totalExperience = 0;
+            if (id == null)
+            {
+                return totalExperience;
+            }
+            CandidateExperience candidateExperience = db.CandidateExperiences.Find(id);
+            Candidate candidate = db.Candidates.Find(id);
+            if (candidate == null)
+            {
+                return totalExperience;
+            }
+            return totalExperience;
+        }
+
         [Authorize]
         public ActionResult ExperienceMultipleView()
         {

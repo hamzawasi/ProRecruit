@@ -12,7 +12,7 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Candidate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -67,7 +67,9 @@ namespace ProRecruit
         public string CurrentSalary { get; set; }
         [Display(Name = "Expected Salary")]
         public string ExpectedSalary { get; set; }
-
+        [Display(Name = "Experience")]
+        public Nullable<int> YearsExperience { get; set; }
+    
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CareerLevel CareerLevel1 { get; set; }
         public virtual FunctionalArea FunctionalArea1 { get; set; }
