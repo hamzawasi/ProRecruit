@@ -124,6 +124,22 @@ namespace ProRecruit.Controllers
             return Json(types);
         }
 
+        public int GetCandidateExperience(string id)
+        {
+            int totalExperience = 0;
+            if (id == null)
+            {
+                return totalExperience;
+            }
+            CandidateExperience candidateExperience = db.CandidateExperiences.Find(id);
+            Candidate candidate = db.Candidates.Find(id);
+            if (candidate == null)
+            {
+                return totalExperience;
+            }
+            return totalExperience;
+        }
+
         [HttpPost]
         public JsonResult ReturnValuesOfGPA4()
         {
