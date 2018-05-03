@@ -206,6 +206,9 @@
     <Compile Include="CandidateQualification.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CandidateSavedJob.cs">
+      <DependentUpon>ProRecruit_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="CandidateSkill.cs">
       <DependentUpon>ProRecruit_Model.tt</DependentUpon>
     </Compile>
@@ -401,9 +404,13 @@
     <Content Include="Views\CV\QualificationMulitpleView.cshtml" />
     <Content Include="Views\CV\AddCandidateProject.cshtml" />
     <Content Include="Views\CV\ProjectsMultipleView.cshtml" />
+    <Content Include="Views\Shared\_Layout_Candidate.cshtml" />
+    <Content Include="Views\Jobs\ViewSavedJobs.cshtml" />
+    <Content Include="Views\CV\DeleteQualification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Sourcing\MatchJobRequirements\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

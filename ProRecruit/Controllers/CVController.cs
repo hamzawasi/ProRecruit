@@ -80,10 +80,18 @@ namespace ProRecruit.Controllers
                     {
                         db.Entry(cq).State = EntityState.Modified;
                         db.SaveChanges();
+                        Candidate candidate = db.Candidates.Find(id);
+                        candidate.HighestDegree = GetLatestDegree();
+                        db.Entry(candidate).State = EntityState.Modified;
+                        db.SaveChanges();
                     }
                     else
                     {
                         db.CandidateQualifications.Add(cq);
+                        db.SaveChanges();
+                        Candidate candidate = db.Candidates.Find(id);
+                        candidate.HighestDegree = GetLatestDegree();
+                        db.Entry(candidate).State = EntityState.Modified;
                         db.SaveChanges();
                     }
                 }
@@ -106,6 +114,57 @@ namespace ProRecruit.Controllers
             return View(model);
         }
 
+        public ActionResult DeleteQualification(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CandidateQualification candidateQualification = db.CandidateQualifications.Find(id);
+            if (candidateQualification == null)
+            {
+                return HttpNotFound();
+            }
+            return View(candidateQualification);
+        }
+
+        ////POST: CV/DeleteQualification/5
+        //[HttpPost, ActionName("Delete")]
+        ////[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteQualificationConfirmed(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    CandidateQualification candidateQualification = db.CandidateQualifications.Find(id);
+        //    if (candidateQualification == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    db.CandidateQualifications.Remove(candidateQualification);
+        //    db.SaveChanges();
+        //    return RedirectToAction("AddCandidateQualifications");
+        //}
+
+        [HttpDelete]
+        public JsonResult DeleteQualificationConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return Json("Bad Request");
+            }
+            CandidateQualification candidateQualification = db.CandidateQualifications.Find(id);
+            if (candidateQualification == null)
+            {
+                return Json("Not Found");
+            }
+            db.CandidateQualifications.Remove(candidateQualification);
+            db.SaveChanges();
+            return Json("Deleted");
+        }
+
         [HttpPost]
         public JsonResult GetTypesByQualification(string id)
         {
@@ -124,20 +183,79 @@ namespace ProRecruit.Controllers
             return Json(types);
         }
 
-        public int GetCandidateExperience(string id)
+        public int GetCandidateExperience()
         {
+            string id = User.Identity.GetUserId();
             int totalExperience = 0;
+            List<int> years = new List<int>();
             if (id == null)
             {
                 return totalExperience;
             }
-            CandidateExperience candidateExperience = db.CandidateExperiences.Find(id);
-            Candidate candidate = db.Candidates.Find(id);
-            if (candidate == null)
+            //List<CandidateExperience> candidateExperiences = db.CandidateExperiences.Where(ce => ce.UserId == id).ToList();
+            var candidateExperiences = db.CandidateExperiences.Where(ce => ce.UserId == id).ToList();
+            if (candidateExperiences.Count == 0)
             {
                 return totalExperience;
             }
+            for (int i = 0; i < candidateExperiences.Count; i++)
+            {
+                //int FromDate = 0;
+                //if (candidateExperiences[i].Ongoing == true)
+                //{
+                //    FromDate = DateTime.Now.Year;
+                //}
+                //else
+                //{
+                //    FromDate = candidateExperiences[i].FromDate.Year;
+                //}
+                //int exp = candidateExperiences[i].ToDate.Value.Year - FromDate;
+                //years.Add(exp);
+                int exp = candidateExperiences[i].ToDate.Value.Year - candidateExperiences[i].FromDate.Year;
+                years.Add(exp);
+            }
+            for (int i = 0; i < years.Count; i++)
+            {
+                totalExperience += years[i];
+            }
             return totalExperience;
+        }
+
+        public int GetLatestDegree()
+        {
+            string id = User.Identity.GetUserId();
+            int latestDegree = -1;
+            List<int> degrees = new List<int>();
+
+            if (id == null)
+            {
+                return latestDegree;
+            }
+            
+            var candidateQualifications = db.CandidateQualifications.Where(ce => ce.UserId == id).ToList();
+            if (candidateQualifications.Count == 0)
+            {
+                return latestDegree;
+            }
+            for (int i = 0; i < candidateQualifications.Count; i++)
+            {
+                int degree = candidateQualifications[i].DegreeLevel.Value;
+                degrees.Add(degree);
+            }
+
+            List<int> allFetchedValues = new List<int>();
+
+            for (int i = 0; i < degrees.Count; i++)
+            {
+                if (degrees[i] >= 1107 && degrees[i] <= 1113)
+                {
+                    allFetchedValues.Add(degrees[i]);
+                }
+            }
+
+            latestDegree = allFetchedValues.Max();
+
+            return latestDegree;
         }
 
         [HttpPost]
@@ -366,10 +484,18 @@ namespace ProRecruit.Controllers
                 {
                     db.Entry(ce).State = EntityState.Modified;
                     db.SaveChanges();
+                    Candidate candidate = db.Candidates.Find(id);
+                    candidate.YearsExperience = GetCandidateExperience();
+                    db.Entry(candidate).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 else
                 {
                     db.CandidateExperiences.Add(ce);
+                    db.SaveChanges();
+                    Candidate candidate = db.Candidates.Find(id);
+                    candidate.YearsExperience = GetCandidateExperience();
+                    db.Entry(candidate).State = EntityState.Modified;
                     db.SaveChanges();
                 }
             }

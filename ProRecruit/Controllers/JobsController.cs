@@ -31,6 +31,120 @@ namespace ProRecruit.Controllers
             return View(jobsPosted);
         }
 
+        [HttpPost]
+        public JsonResult ReturnValuesOfGPA4()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            #region interestingApproach
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    for (int j = 0; j < 9; j++)
+            //    {
+            //        values.Add(new SelectListItem
+            //        {
+            //            Value = j.ToString(),
+            //            Text = j.ToString()
+            //        });
+            //    }
+            //}
+            #endregion
+            values.Add(new SelectListItem { Value = "1.0", Text = "1.0" });
+            values.Add(new SelectListItem { Value = "1.1", Text = "1.1" });
+            values.Add(new SelectListItem { Value = "1.2", Text = "1.2" });
+            values.Add(new SelectListItem { Value = "1.3", Text = "1.3" });
+            values.Add(new SelectListItem { Value = "1.4", Text = "1.4" });
+            values.Add(new SelectListItem { Value = "1.5", Text = "1.5" });
+            values.Add(new SelectListItem { Value = "1.6", Text = "1.6" });
+            values.Add(new SelectListItem { Value = "1.7", Text = "1.7" });
+            values.Add(new SelectListItem { Value = "1.8", Text = "1.8" });
+            values.Add(new SelectListItem { Value = "1.9", Text = "1.9" });
+            values.Add(new SelectListItem { Value = "2.0", Text = "2.0" });
+            values.Add(new SelectListItem { Value = "2.1", Text = "2.1" });
+            values.Add(new SelectListItem { Value = "2.2", Text = "2.2" });
+            values.Add(new SelectListItem { Value = "2.3", Text = "2.3" });
+            values.Add(new SelectListItem { Value = "2.4", Text = "2.4" });
+            values.Add(new SelectListItem { Value = "2.5", Text = "2.5" });
+            values.Add(new SelectListItem { Value = "2.6", Text = "2.6" });
+            values.Add(new SelectListItem { Value = "2.7", Text = "2.7" });
+            values.Add(new SelectListItem { Value = "2.8", Text = "2.8" });
+            values.Add(new SelectListItem { Value = "2.9", Text = "2.9" });
+            values.Add(new SelectListItem { Value = "3.0", Text = "3.0" });
+            values.Add(new SelectListItem { Value = "3.1", Text = "3.1" });
+            values.Add(new SelectListItem { Value = "3.2", Text = "3.2" });
+            values.Add(new SelectListItem { Value = "3.3", Text = "3.3" });
+            values.Add(new SelectListItem { Value = "3.4", Text = "3.4" });
+            values.Add(new SelectListItem { Value = "3.5", Text = "3.5" });
+            values.Add(new SelectListItem { Value = "3.6", Text = "3.6" });
+            values.Add(new SelectListItem { Value = "3.7", Text = "3.7" });
+            values.Add(new SelectListItem { Value = "3.8", Text = "3.8" });
+            values.Add(new SelectListItem { Value = "3.9", Text = "3.9" });
+            values.Add(new SelectListItem { Value = "4.0", Text = "4.0" });
+            return Json(values);
+        }
+
+        [HttpPost]
+        public JsonResult ReturnValuesOfGPA5()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            values.Add(new SelectListItem { Value = "1.0", Text = "1.0" });
+            values.Add(new SelectListItem { Value = "1.1", Text = "1.1" });
+            values.Add(new SelectListItem { Value = "1.2", Text = "1.2" });
+            values.Add(new SelectListItem { Value = "1.3", Text = "1.3" });
+            values.Add(new SelectListItem { Value = "1.4", Text = "1.4" });
+            values.Add(new SelectListItem { Value = "1.5", Text = "1.5" });
+            values.Add(new SelectListItem { Value = "1.6", Text = "1.6" });
+            values.Add(new SelectListItem { Value = "1.7", Text = "1.7" });
+            values.Add(new SelectListItem { Value = "1.8", Text = "1.8" });
+            values.Add(new SelectListItem { Value = "1.9", Text = "1.9" });
+            values.Add(new SelectListItem { Value = "2.0", Text = "2.0" });
+            values.Add(new SelectListItem { Value = "2.1", Text = "2.1" });
+            values.Add(new SelectListItem { Value = "2.2", Text = "2.2" });
+            values.Add(new SelectListItem { Value = "2.3", Text = "2.3" });
+            values.Add(new SelectListItem { Value = "2.4", Text = "2.4" });
+            values.Add(new SelectListItem { Value = "2.5", Text = "2.5" });
+            values.Add(new SelectListItem { Value = "2.6", Text = "2.6" });
+            values.Add(new SelectListItem { Value = "2.7", Text = "2.7" });
+            values.Add(new SelectListItem { Value = "2.8", Text = "2.8" });
+            values.Add(new SelectListItem { Value = "2.9", Text = "2.9" });
+            values.Add(new SelectListItem { Value = "3.0", Text = "3.0" });
+            values.Add(new SelectListItem { Value = "3.1", Text = "3.1" });
+            values.Add(new SelectListItem { Value = "3.2", Text = "3.2" });
+            values.Add(new SelectListItem { Value = "3.3", Text = "3.3" });
+            values.Add(new SelectListItem { Value = "3.4", Text = "3.4" });
+            values.Add(new SelectListItem { Value = "3.5", Text = "3.5" });
+            values.Add(new SelectListItem { Value = "3.6", Text = "3.6" });
+            values.Add(new SelectListItem { Value = "3.7", Text = "3.7" });
+            values.Add(new SelectListItem { Value = "3.8", Text = "3.8" });
+            values.Add(new SelectListItem { Value = "3.9", Text = "3.9" });
+            values.Add(new SelectListItem { Value = "4.0", Text = "4.0" });
+            values.Add(new SelectListItem { Value = "4.1", Text = "4.1" });
+            values.Add(new SelectListItem { Value = "4.2", Text = "4.2" });
+            values.Add(new SelectListItem { Value = "4.3", Text = "4.3" });
+            values.Add(new SelectListItem { Value = "4.4", Text = "4.4" });
+            values.Add(new SelectListItem { Value = "4.5", Text = "4.5" });
+            values.Add(new SelectListItem { Value = "4.6", Text = "4.6" });
+            values.Add(new SelectListItem { Value = "4.7", Text = "4.7" });
+            values.Add(new SelectListItem { Value = "4.8", Text = "4.8" });
+            values.Add(new SelectListItem { Value = "4.9", Text = "4.9" });
+            values.Add(new SelectListItem { Value = "5.0", Text = "5.0" });
+            return Json(values);
+        }
+
+        [HttpPost]
+        public JsonResult RetrunValuesOfPercentage()
+        {
+            List<SelectListItem> values = new List<SelectListItem>();
+            for (int i = 40; i < 101; i++)
+            {
+                values.Add(new SelectListItem
+                {
+                    Value = i.ToString(),
+                    Text = i.ToString()
+                });
+            }
+            return Json(values);
+        }
+
         [Authorize]
         public ActionResult AddJobQualifications(int? id)
         {
@@ -75,10 +189,12 @@ namespace ProRecruit.Controllers
         [Authorize]
         public ActionResult QualificationMulitpleView(int id)
         {
-            var qualifications = from qualification in db.JobQualifications
-                                 where qualification.JobId.Equals(id)
-                                 select qualification;
-            return View(qualifications.ToList());
+            var jobQualifications = from jobQualification in db.JobQualifications
+                                    join qualification in db.Qualifications
+                                    on jobQualification.DegreeLevel equals qualification.Id
+                                    where jobQualification.JobId.Equals(id)
+                                    select jobQualification;
+            return View(jobQualifications.ToList());
         }
 
         [Authorize]
@@ -86,6 +202,7 @@ namespace ProRecruit.Controllers
         {
             ViewBag.JobId = id.ToString();
             ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName");
+            ViewBag.SkillExperienceId = new SelectList(db.SkillExperiences, "Id", "Experience");
             return View();
         }
 
@@ -97,6 +214,7 @@ namespace ProRecruit.Controllers
             string viewBagJobId = Request["JobId"].ToString();
             //ViewBag.Trigger = Request.Form["JobId"];
             ViewBag.SkillId = new SelectList(db.Skills, "Id", "SkillName", js.SkillId);
+            ViewBag.SkillExperienceId = new SelectList(db.SkillExperiences, "Id", "Experience", js.Experience);
 
             if (ModelState.IsValid)
             {
@@ -120,6 +238,60 @@ namespace ProRecruit.Controllers
                 }
             }
             return View(js);
+        }
+
+        [Authorize]
+        public ActionResult ViewSavedJobs()
+        {
+            string id = User.Identity.GetUserId();
+            var savedJobs = db.CandidateSavedJobs.Where(sj => sj.CandidateId == id).ToList();
+            return View(savedJobs);
+        }
+
+        //public ActionResult SaveCandidateJob(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Job job = db.Jobs.Find(id);
+        //    if (job == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(job);
+        //}
+
+        //[HttpPost]
+        [Authorize]
+        public ActionResult SaveCandidateJob(int jobId)
+        {
+            string userid = User.Identity.GetUserId();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    CandidateSavedJob csj = new CandidateSavedJob();
+                    csj.CandidateId = userid;
+                    csj.JobId = jobId;
+                    if (csj.Id > 0)
+                    {
+                        db.Entry(csj).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.CandidateSavedJobs.Add(csj);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+
+            return RedirectToAction("ViewSavedJobs", "Jobs");
         }
 
         [Authorize]
@@ -151,6 +323,7 @@ namespace ProRecruit.Controllers
         {
             //ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name");
             //ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel");
+            ViewBag.FunctionalArea = new SelectList(db.FunctionalAreas, "Id", "Name");
             return View();
         }
 
@@ -162,7 +335,6 @@ namespace ProRecruit.Controllers
         [Authorize]
         public ActionResult Create(Job job)
         {
-            //AspNetUser user = db.AspNetUsers.Find(User.Identity.GetUserId());
             string userid = User.Identity.GetUserId();
             job.UserId = userid;
 
@@ -173,6 +345,7 @@ namespace ProRecruit.Controllers
                 return RedirectToAction("Dashboard", "Organizations");
             }
 
+            ViewBag.FunctionalArea = new SelectList(db.FunctionalAreas, "Id", "Name");
             //ViewBag.UserId = new SelectList(db.Organizations, "UserId", "Name", job.UserId);
             //ViewBag.Id = new SelectList(db.JobQualifications, "Id", "DegreeLevel", job.Id);
             return View(job);

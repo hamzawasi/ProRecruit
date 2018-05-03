@@ -10,25 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Institution)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletionYear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegreeLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegreeType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DegreeTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MajorSubject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.DisplayNameFor(model => model.Qualification.QualificationName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ResultType)
@@ -45,9 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.YourGPA)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Qualification.QualificationName)
-        </th>
         <th></th>
     </tr>
 
@@ -55,25 +34,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Institution)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompletionYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DegreeLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DegreeType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DegreeTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MajorSubject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
+                @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ResultType)
@@ -89,9 +50,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.YourGPA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qualification.QualificationName)
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

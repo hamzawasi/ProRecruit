@@ -11,6 +11,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Skill.SkillName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkillExperience.Experience)
+        </th>
         <th></th>
     </tr>
 
@@ -19,6 +22,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Skill.SkillName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillExperience.Experience)
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })

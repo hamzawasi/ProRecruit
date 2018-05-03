@@ -35,7 +35,7 @@ namespace ProRecruit
         [Required(ErrorMessage = "Organization Name is Required")]
         public string OrganizationName { get; set; }
         public Nullable<bool> Ongoing { get; set; }
-    
+
         public virtual Candidate Candidate { get; set; }
     }
 }

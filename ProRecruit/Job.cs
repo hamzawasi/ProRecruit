@@ -11,6 +11,7 @@ namespace ProRecruit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Job
     {
@@ -18,20 +19,37 @@ namespace ProRecruit
         public Job()
         {
             this.CandidateJobs = new HashSet<CandidateJob>();
+            this.CandidateSavedJobs = new HashSet<CandidateSavedJob>();
             this.JobQualifications = new HashSet<JobQualification>();
             this.JobSkills = new HashSet<JobSkill>();
         }
     
         public Nullable<System.DateTime> DatePublished { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Apply By")]
+        [Required(ErrorMessage = "Date Apply By is Required")]
         public Nullable<System.DateTime> DateApplyBy { get; set; }
+        [Display(Name = "Job Title")]
+        [Required(ErrorMessage = "First Name is Required")]
         public string Title { get; set; }
+        [Display(Name = "Job Description")]
+        [Required(ErrorMessage = "Description is Required")]
         public string JobDescription { get; set; }
         public string Location { get; set; }
+        [Display(Name = "Salary Range")]
+        [Required(ErrorMessage = "Salary Range is Required")]
         public string SalaryRange { get; set; }
+        [Display(Name = "Functional Area")]
+        [Required(ErrorMessage = "Functional Area is Required")]
         public string FunctionalArea { get; set; }
+        [Display(Name = "Job Shift")]
+        [Required(ErrorMessage = "Job Shift is Required")]
         public string JobShift { get; set; }
         public string Gender { get; set; }
+        [Display(Name = "Required Experience")]
+        [Required(ErrorMessage = "Experience is Required")]
         public string ReqYearsOfExp { get; set; }
+        [Display(Name = "Age Requirement")]
         public string AgeRequirement { get; set; }
         public string UserId { get; set; }
         public int Id { get; set; }
@@ -41,6 +59,8 @@ namespace ProRecruit
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateJob> CandidateJobs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateSavedJob> CandidateSavedJobs { get; set; }
         public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobQualification> JobQualifications { get; set; }

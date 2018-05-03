@@ -4,30 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="882961107a4e49a7b838fd885055eba9" Name="Diagram1">
+      <Diagram DiagramId="0a3ee9356ce2437e9fb5157b7405cff1" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="ProRecruit.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.AspNetRole" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.AspNetUser" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Candidate" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateExperience" Width="1.5" PointX="10.5" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateJob" Width="1.5" PointX="13.5" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateLanguage" Width="1.5" PointX="10.5" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateProject" Width="1.5" PointX="10.5" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateQualification" Width="1.5" PointX="13.5" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CandidateSkill" Width="1.5" PointX="13.5" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.CareerLevel" Width="1.5" PointX="6" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.FunctionalArea" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Industry" Width="1.5" PointX="6" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Job" Width="1.5" PointX="7.5" PointY="28.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.JobQualification" Width="1.5" PointX="9.75" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.JobSkill" Width="1.5" PointX="12.75" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Organization" Width="1.5" PointX="5.25" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Qualification" Width="1.5" PointX="11.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.QualificationType" Width="1.5" PointX="11.25" PointY="27" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.Skill" Width="1.5" PointX="11.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProRecruit.SkillExperience" Width="1.5" PointX="11.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.AspNetRole" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.AspNetUser" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Candidate" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateExperience" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateJob" Width="1.5" PointX="13.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateLanguage" Width="1.5" PointX="10.5" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateProject" Width="1.5" PointX="10.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateQualification" Width="1.5" PointX="13.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateSavedJob" Width="1.5" PointX="13.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CandidateSkill" Width="1.5" PointX="13.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.CareerLevel" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.FunctionalArea" Width="1.5" PointX="6" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Industry" Width="1.5" PointX="6" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Job" Width="1.5" PointX="7.5" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.JobQualification" Width="1.5" PointX="9.75" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.JobSkill" Width="1.5" PointX="12.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Organization" Width="1.5" PointX="5.25" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Qualification" Width="1.5" PointX="11.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.QualificationType" Width="1.5" PointX="11.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.Skill" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProRecruit.SkillExperience" Width="1.5" PointX="11.25" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProRecruit.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ProRecruit.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -41,15 +42,18 @@
         <AssociationConnector Association="ProRecruit.FK_CandidateLanguages_Candidate" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateProjects_Candidate" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateQualification_Candidate" ManuallyRouted="false" />
+        <AssociationConnector Association="ProRecruit.FK_CandidateSavedJobs_Candidate" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateSkills_Candidate" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateJob_Job" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateQualification_Qualification" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateQualification_QualificationType" ManuallyRouted="false" />
+        <AssociationConnector Association="ProRecruit.FK_CandidateSavedJobs_Job" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.CandidateSkills_SkillId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_CandidateSkills_SkillExperience" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_Job_Organization1" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_JobQualification_Job1" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_JobSkills_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="ProRecruit.FK_JobQualification_Qualification" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_JobSkills_Skill" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_JobSkills_SkillExperience" ManuallyRouted="false" />
         <AssociationConnector Association="ProRecruit.FK_QualificationType_Qualification" ManuallyRouted="false" />

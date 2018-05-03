@@ -1,0 +1,82 @@
+﻿@model ProRecruit.CandidateQualification
+@{
+    ViewBag.Title = "DeleteQualification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+
+    <h2>Delete Qualification</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Qualification.QualificationName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Qualification.QualificationName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Degreetitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Degreetitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Institution)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Institution)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" id="btn_Delete" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Test", null)
+                @Html.ActionLink("Back", "AddCandidateQualifications")
+            </div>
+        }
+    </div>
+</body>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $("#btn_Delete").click(function () {
+        @*$.ajax({
+            url: "/CV/DeleteQualificationConfirmed/" + @Model.Id,
+            type: "Post",
+            data: { },
+            dataType: "json",
+            success: function (data) {
+
+            },
+            error: function (xhr) {
+
+            }
+        });*@
+        $.ajax({
+            url: '/CV/DeleteQualificationConfirmed/',
+            dataType: "json",
+            type: "DELETE",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ id: @Model.Id.ToString() }),
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                alert(data);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    });
+</script>

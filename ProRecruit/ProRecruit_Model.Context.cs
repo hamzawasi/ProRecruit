@@ -36,6 +36,7 @@ namespace ProRecruit
         public virtual DbSet<CandidateLanguage> CandidateLanguages { get; set; }
         public virtual DbSet<CandidateProject> CandidateProjects { get; set; }
         public virtual DbSet<CandidateQualification> CandidateQualifications { get; set; }
+        public virtual DbSet<CandidateSavedJob> CandidateSavedJobs { get; set; }
         public virtual DbSet<CandidateSkill> CandidateSkills { get; set; }
         public virtual DbSet<CareerLevel> CareerLevels { get; set; }
         public virtual DbSet<FunctionalArea> FunctionalAreas { get; set; }

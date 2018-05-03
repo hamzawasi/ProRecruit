@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ProRecruit.CandidateSavedJob>
+@{
+    ViewBag.Title = "ViewSavedJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Saved Jobs</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.Organization.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Organization.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Delete From Saved", "DeleteSavedCandidateJob", new { jobId = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

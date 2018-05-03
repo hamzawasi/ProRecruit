@@ -23,6 +23,7 @@ namespace ProRecruit
             this.CandidateLanguages = new HashSet<CandidateLanguage>();
             this.CandidateProjects = new HashSet<CandidateProject>();
             this.CandidateQualifications = new HashSet<CandidateQualification>();
+            this.CandidateSavedJobs = new HashSet<CandidateSavedJob>();
             this.CandidateSkills = new HashSet<CandidateSkill>();
         }
 
@@ -67,7 +68,10 @@ namespace ProRecruit
         public string CurrentSalary { get; set; }
         [Display(Name = "Expected Salary")]
         public string ExpectedSalary { get; set; }
-
+        [Display(Name = "Total Experience")]
+        public Nullable<int> YearsExperience { get; set; }
+        public Nullable<int> HighestDegree { get; set; }
+    
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CareerLevel CareerLevel1 { get; set; }
         public virtual FunctionalArea FunctionalArea1 { get; set; }
@@ -82,6 +86,8 @@ namespace ProRecruit
         public virtual ICollection<CandidateProject> CandidateProjects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateQualification> CandidateQualifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CandidateSavedJob> CandidateSavedJobs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidateSkill> CandidateSkills { get; set; }
     }

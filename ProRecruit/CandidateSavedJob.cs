@@ -12,18 +12,13 @@ namespace ProRecruit
     using System;
     using System.Collections.Generic;
     
-    public partial class JobQualification
+    public partial class CandidateSavedJob
     {
         public int Id { get; set; }
-        public int JobId { get; set; }
-        public string ResultType { get; set; }
-        public string TotalGPA { get; set; }
-        public string TotalPercentage { get; set; }
-        public string TotalGrade { get; set; }
-        public string YourGPA { get; set; }
-        public Nullable<int> DegreeLevel { get; set; }
+        public string CandidateId { get; set; }
+        public Nullable<int> JobId { get; set; }
     
+        public virtual Candidate Candidate { get; set; }
         public virtual Job Job { get; set; }
-        public virtual Qualification Qualification { get; set; }
     }
 }

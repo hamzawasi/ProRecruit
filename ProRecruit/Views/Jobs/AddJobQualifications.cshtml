@@ -24,117 +24,82 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Qualification.QualificationName, "QualificationName", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DegreeLevel, "QualificationName", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("QualificationId", null, htmlAttributes: new { name = "QualificationId", @class = "form-control" })
-                @*@Html.DropDownList("QualificationName", ViewBag.AddCandidateQualification as SelectList, new { @class = "form-data" })*@
-                @Html.ValidationMessageFor(model => model.Qualification.QualificationName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CompletionYear, htmlAttributes: new { @class = "control-label col-md-2", @type = "date" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CompletionYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CompletionYear, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DegreeLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DegreeLevel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DegreeLevel, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DegreeType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DegreeType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DegreeType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.DegreeTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DegreeTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DegreeTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.MajorSubject, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MajorSubject, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MajorSubject, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Institution, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Institution, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Institution, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CompletionYear, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CompletionYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CompletionYear, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
+        <div id="divResultType" class="form-group hidden">
             @Html.LabelFor(model => model.ResultType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ResultType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ResultType, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.ResultType, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text = "Select One" },
+                        new SelectListItem{ Text = "Grade", Value = "Grade" },
+                        new SelectListItem{ Text = "GPA", Value = "GPA" },
+                        new SelectListItem{ Text = "Percentage", Value = "Percentage" }
+                    }, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResultType)
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="divTotalGpa" class="form-group hidden">
             @Html.LabelFor(model => model.TotalGPA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalGPA, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="ddlTotalGPA" class="form-control">
+                    <option value="">Select One</option>
+                    <option value="4" dir="ltr">4</option>
+                    <option value="5" dir="ltr">5</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.TotalGPA, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="divYourGpa" class="form-group hidden">
+            @Html.LabelFor(model => model.YourGPA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="ddlYourGPA" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.YourGPA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="divTotalGrade" class="form-group hidden">
             @Html.LabelFor(model => model.TotalGrade, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalGrade, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="ddlTotalGrade" class="form-control">
+                    <option value="">Select One</option>
+                    <option value="A+" dir="ltr">A+</option>
+                    <option value="A" dir="ltr">A</option>
+                    <option value="B+" dir="ltr">B+</option>
+                    <option value="B" dir="ltr">B</option>
+                    <option value="C+" dir="ltr">C+</option>
+                    <option value="C" dir="ltr">C</option>
+                    <option value="D+" dir="ltr">D+</option>
+                    <option value="D" dir="ltr">D</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.TotalGrade, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="divTotalPercentage" class="form-group hidden">
             @Html.LabelFor(model => model.TotalPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalPercentage, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="ddlTotalPercentage" class="form-control"></select>
                 @Html.ValidationMessageFor(model => model.TotalPercentage, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.YourGPA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YourGPA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YourGPA, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <input id='JobId' name='JobId' value='@ViewBag.JobId' type="hidden"/>
 
         @*@(InputExtensions.Hidden(Html,"JobId", ViewBag.JobId))*@
+
+        @Html.HiddenFor(model => model.DegreeLevel, new { id = "hiddenDegreeLevel" })
+        @Html.HiddenFor(model => model.TotalGrade, new { id = "hiddenTotalGrade" })
+        @Html.HiddenFor(model => model.TotalGPA, new { id = "hiddenTotalGPA" })
+        @Html.HiddenFor(model => model.YourGPA, new { id = "hiddenYourGPA" })
+        @Html.HiddenFor(model => model.TotalPercentage, new { id = "hiddenTotalPercentage" })
 
 
 
@@ -155,6 +120,117 @@
                 $("#multipleView").html(result);
             }
         });
+    });
+
+    $("#QualificationId").change(function () {
+        $("#divResultType").removeClass('hidden');
+    });
+
+    $("#ResultType").change(function () {
+        $("#divTotalGrade").addClass('hidden');
+        $("#divTotalGpa").addClass('hidden');
+        $("#divTotalPercentage").addClass('hidden');
+        $("#divYourGpa").addClass('hidden');
+
+        var val = $("#ResultType").val();
+
+        if (val == 'Grade') {
+            $("#divTotalGrade").removeClass('hidden');
+        }
+        if (val == 'GPA') {
+            $("#divTotalGpa").removeClass('hidden');
+        }
+        if (val == 'Percentage') {
+            $("#divTotalPercentage").removeClass('hidden');
+            $.ajax({
+                type: "POST",
+                url: "/Jobs/RetrunValuesOfPercentage/",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#ddlTotalPercentage").empty().append('<option selected="selected" value="0">Please select</option>');
+                    $.each(response, function () {
+                        $("#ddlTotalPercentage").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            })
+        }
+    });
+
+    $("#ddlTotalGPA").change(function () {
+        $("#divYourGpa4").addClass('hidden');
+        $("#divYourGpa5").addClass('hidden');
+        $("#ddlYourGPA").empty();
+
+        var val = $("#ddlTotalGPA").val();
+
+        if (val == '4') {
+            $("#divYourGpa").removeClass('hidden');
+            $.ajax({
+                type: "POST",
+                url: "/Jobs/ReturnValuesOfGPA4/",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#ddlYourGPA").empty().append('<option selected="selected" value="0">Please select</option>');
+                    $.each(response, function () {
+                        $("#ddlYourGPA").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            })
+        }
+        if (val == '5') {
+            $("#divYourGpa").removeClass('hidden');
+            $.ajax({
+                type: "POST",
+                url: "/Jobs/ReturnValuesOfGPA5/",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#ddlYourGPA").empty().append('<option selected="selected" value="0">Please select</option>');
+                    $.each(response, function () {
+                        $("#ddlYourGPA").append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+
+            })
+        }
+    });
+
+    $("#Create").click(function () {
+        var valDegreeLevel = $("#QualificationId").val();
+        var valTotalGrade = $("#ddlTotalGrade").val();
+        var valTotalGPA = $("#ddlTotalGPA").val();
+        var valYourGPA = $("#ddlYourGPA").val();
+        var valTotalPercentage = $("#ddlTotalPercentage").val();
+
+        $("#hiddenDegreeLevel").val(valDegreeLevel);
+        $("#hiddenTotalGrade").val(valTotalGrade);
+        $("#hiddenTotalGPA").val(valTotalGPA);
+        $("#hiddenYourGPA").val(valYourGPA);
+        $("#hiddenTotalPercentage").val(valTotalPercentage);
     });
 
 </script>

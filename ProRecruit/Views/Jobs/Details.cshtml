@@ -107,13 +107,27 @@
             @Html.DisplayFor(model => model.Organization.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobQualification.DegreeLevel)
-        </dt>
+        
+            @*Job Qualifications
+        
 
         <dd>
-            @Html.DisplayFor(model => model.JobQualification.DegreeLevel)
-        </dd>
+            <table class="table-hover">
+                <tr>
+                    <th>Qualification</th>
+                </tr>
+
+                @foreach (var item in Model.JobQualifications.ToList())
+                {
+                    <tr>
+                        <td>
+                            @item.DegreeLevel
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </dd>*@
 
     </dl>
 </div>

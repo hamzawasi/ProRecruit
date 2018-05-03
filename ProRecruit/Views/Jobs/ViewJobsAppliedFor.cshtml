@@ -44,9 +44,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Job.Organization.Name)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Job.JobQualification.DegreeLevel)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -89,9 +89,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Job.Organization.Name)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Job.JobQualification.DegreeLevel)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>

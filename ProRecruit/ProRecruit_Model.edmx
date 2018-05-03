@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProRecruit.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProRecruit.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -91,6 +91,8 @@
           <Property Name="FunctionalArea" Type="int" />
           <Property Name="CurrentSalary" Type="nvarchar" MaxLength="50" />
           <Property Name="ExpectedSalary" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearsExperience" Type="int" />
+          <Property Name="HighestDegree" Type="int" />
         </EntityType>
         <EntityType Name="CandidateExperience">
           <Key>
@@ -157,6 +159,14 @@
           <Property Name="DegreeLevel" Type="int" />
           <Property Name="DegreeType" Type="int" />
           <Property Name="ResultStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CandidateSavedJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateId" Type="nvarchar" MaxLength="128" />
+          <Property Name="JobId" Type="int" />
         </EntityType>
         <EntityType Name="CandidateSkills">
           <Key>
@@ -443,6 +453,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CandidateSavedJobs_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateSavedJobs" Type="Self.CandidateSavedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateSavedJobs">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateSavedJobs_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="CandidateSavedJobs" Type="Self.CandidateSavedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSavedJobs">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CandidateSkills_Candidate">
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
           <End Role="CandidateSkills" Type="Self.CandidateSkills" Multiplicity="*" />
@@ -547,6 +581,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="DegreeLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JobSkills_Job">
           <End Role="Job" Type="Self.Job" Multiplicity="1" />
           <End Role="JobSkills" Type="Self.JobSkills" Multiplicity="*" />
@@ -620,6 +666,7 @@
           <EntitySet Name="CandidateLanguages" EntityType="Self.CandidateLanguages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateQualification" EntityType="Self.CandidateQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateSavedJobs" EntityType="Self.CandidateSavedJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CareerLevel" EntityType="Self.CareerLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionalArea" EntityType="Self.FunctionalArea" Schema="dbo" store:Type="Tables" />
@@ -685,6 +732,14 @@
             <End Role="QualificationType" EntitySet="QualificationType" />
             <End Role="CandidateQualification" EntitySet="CandidateQualification" />
           </AssociationSet>
+          <AssociationSet Name="FK_CandidateSavedJobs_Candidate" Association="Self.FK_CandidateSavedJobs_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidateSavedJobs" EntitySet="CandidateSavedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateSavedJobs_Job" Association="Self.FK_CandidateSavedJobs_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="CandidateSavedJobs" EntitySet="CandidateSavedJobs" />
+          </AssociationSet>
           <AssociationSet Name="FK_CandidateSkills_Candidate" Association="Self.FK_CandidateSkills_Candidate">
             <End Role="Candidate" EntitySet="Candidate" />
             <End Role="CandidateSkills" EntitySet="CandidateSkills" />
@@ -717,6 +772,10 @@
             <End Role="Job" EntitySet="Job" />
             <End Role="JobQualification" EntitySet="JobQualification" />
           </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Qualification" Association="Self.FK_JobQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="JobQualification" EntitySet="JobQualification" />
+          </AssociationSet>
           <AssociationSet Name="FK_JobSkills_Job" Association="Self.FK_JobSkills_Job">
             <End Role="Job" EntitySet="Job" />
             <End Role="JobSkills" EntitySet="JobSkills" />
@@ -738,8 +797,7 @@
             <End Role="QualificationType" EntitySet="QualificationType" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProRecruit" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -829,6 +887,7 @@
           <Property Name="FunctionalArea" Type="Int32" />
           <Property Name="CurrentSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ExpectedSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearsExperience" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Candidate_AspNetUsers" FromRole="Candidate" ToRole="AspNetUsers" />
           <NavigationProperty Name="CareerLevel1" Relationship="Self.FK_Candidate_CareerLevel" FromRole="Candidate" ToRole="CareerLevel" />
           <NavigationProperty Name="FunctionalArea1" Relationship="Self.FK_Candidate_FunctionalArea" FromRole="Candidate" ToRole="FunctionalArea" />
@@ -838,7 +897,9 @@
           <NavigationProperty Name="CandidateLanguages" Relationship="Self.FK_CandidateLanguages_Candidate" FromRole="Candidate" ToRole="CandidateLanguages" />
           <NavigationProperty Name="CandidateProjects" Relationship="Self.FK_CandidateProjects_Candidate" FromRole="Candidate" ToRole="CandidateProjects" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Candidate" FromRole="Candidate" ToRole="CandidateQualification" />
+          <NavigationProperty Name="CandidateSavedJobs" Relationship="Self.FK_CandidateSavedJobs_Candidate" FromRole="Candidate" ToRole="CandidateSavedJobs" />
           <NavigationProperty Name="CandidateSkills" Relationship="Self.FK_CandidateSkills_Candidate" FromRole="Candidate" ToRole="CandidateSkills" />
+          <Property Name="HighestDegree" Type="Int32" />
         </EntityType>
         <EntityType Name="CandidateExperience">
           <Key>
@@ -914,6 +975,16 @@
           <NavigationProperty Name="Qualification" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="CandidateQualification" ToRole="Qualification" />
           <NavigationProperty Name="QualificationType" Relationship="Self.FK_CandidateQualification_QualificationType" FromRole="CandidateQualification" ToRole="QualificationType" />
         </EntityType>
+        <EntityType Name="CandidateSavedJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JobId" Type="Int32" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidateSavedJobs_Candidate" FromRole="CandidateSavedJobs" ToRole="Candidate" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_CandidateSavedJobs_Job" FromRole="CandidateSavedJobs" ToRole="Job" />
+        </EntityType>
         <EntityType Name="CandidateSkill">
           <Key>
             <PropertyRef Name="Id" />
@@ -971,6 +1042,7 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateJobs" Relationship="Self.FK_CandidateJob_Job" FromRole="Job" ToRole="CandidateJob" />
+          <NavigationProperty Name="CandidateSavedJobs" Relationship="Self.FK_CandidateSavedJobs_Job" FromRole="Job" ToRole="CandidateSavedJobs" />
           <NavigationProperty Name="Organization" Relationship="Self.FK_Job_Organization1" FromRole="Job" ToRole="Organization" />
           <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Job1" FromRole="Job" ToRole="JobQualification" />
           <NavigationProperty Name="JobSkills" Relationship="Self.FK_JobSkills_Job" FromRole="Job" ToRole="JobSkills" />
@@ -988,6 +1060,7 @@
           <Property Name="YourGPA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DegreeLevel" Type="Int32" />
           <NavigationProperty Name="Job" Relationship="Self.FK_JobQualification_Job1" FromRole="JobQualification" ToRole="Job" />
+          <NavigationProperty Name="Qualification" Relationship="Self.FK_JobQualification_Qualification" FromRole="JobQualification" ToRole="Qualification" />
         </EntityType>
         <EntityType Name="JobSkill">
           <Key>
@@ -1027,6 +1100,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QualificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CandidateQualifications" Relationship="Self.FK_CandidateQualification_Qualification" FromRole="Qualification" ToRole="CandidateQualification" />
+          <NavigationProperty Name="JobQualifications" Relationship="Self.FK_JobQualification_Qualification" FromRole="Qualification" ToRole="JobQualification" />
           <NavigationProperty Name="QualificationTypes" Relationship="Self.FK_QualificationType_Qualification" FromRole="Qualification" ToRole="QualificationType" />
         </EntityType>
         <EntityType Name="QualificationType">
@@ -1215,6 +1289,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CandidateSavedJobs_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidateSavedJobs" Type="Self.CandidateSavedJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CandidateSavedJobs">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CandidateSkills_Candidate">
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
           <End Role="CandidateSkills" Type="Self.CandidateSkill" Multiplicity="*" />
@@ -1260,6 +1346,18 @@
             </Principal>
             <Dependent Role="CandidateQualification">
               <PropertyRef Name="DegreeType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidateSavedJobs_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="CandidateSavedJobs" Type="Self.CandidateSavedJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidateSavedJobs">
+              <PropertyRef Name="JobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1323,6 +1421,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="0..1" />
+          <End Role="JobQualification" Type="Self.JobQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobQualification">
+              <PropertyRef Name="DegreeLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JobSkills_Skill">
           <End Role="Skill" Type="Self.Skill" Multiplicity="0..1" />
           <End Role="JobSkills" Type="Self.JobSkill" Multiplicity="*" />
@@ -1375,6 +1485,7 @@
           <EntitySet Name="CandidateLanguages" EntityType="Self.CandidateLanguage" />
           <EntitySet Name="CandidateProjects" EntityType="Self.CandidateProject" />
           <EntitySet Name="CandidateQualifications" EntityType="Self.CandidateQualification" />
+          <EntitySet Name="CandidateSavedJobs" EntityType="Self.CandidateSavedJob" />
           <EntitySet Name="CandidateSkills" EntityType="Self.CandidateSkill" />
           <EntitySet Name="CareerLevels" EntityType="Self.CareerLevel" />
           <EntitySet Name="FunctionalAreas" EntityType="Self.FunctionalArea" />
@@ -1436,6 +1547,10 @@
             <End Role="Candidate" EntitySet="Candidates" />
             <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
           </AssociationSet>
+          <AssociationSet Name="FK_CandidateSavedJobs_Candidate" Association="Self.FK_CandidateSavedJobs_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidateSavedJobs" EntitySet="CandidateSavedJobs" />
+          </AssociationSet>
           <AssociationSet Name="FK_CandidateSkills_Candidate" Association="Self.FK_CandidateSkills_Candidate">
             <End Role="Candidate" EntitySet="Candidates" />
             <End Role="CandidateSkills" EntitySet="CandidateSkills" />
@@ -1451,6 +1566,10 @@
           <AssociationSet Name="FK_CandidateQualification_QualificationType" Association="Self.FK_CandidateQualification_QualificationType">
             <End Role="QualificationType" EntitySet="QualificationTypes" />
             <End Role="CandidateQualification" EntitySet="CandidateQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidateSavedJobs_Job" Association="Self.FK_CandidateSavedJobs_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="CandidateSavedJobs" EntitySet="CandidateSavedJobs" />
           </AssociationSet>
           <AssociationSet Name="CandidateSkills_SkillId_FK" Association="Self.CandidateSkills_SkillId_FK">
             <End Role="Skill" EntitySet="Skills" />
@@ -1471,6 +1590,10 @@
           <AssociationSet Name="FK_JobSkills_Job" Association="Self.FK_JobSkills_Job">
             <End Role="Job" EntitySet="Jobs" />
             <End Role="JobSkills" EntitySet="JobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQualification_Qualification" Association="Self.FK_JobQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="JobQualification" EntitySet="JobQualifications" />
           </AssociationSet>
           <AssociationSet Name="FK_JobSkills_Skill" Association="Self.FK_JobSkills_Skill">
             <End Role="Skill" EntitySet="Skills" />
@@ -1554,6 +1677,7 @@
           <EntitySetMapping Name="Candidates">
             <EntityTypeMapping TypeName="ProRecruit.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="HighestDegree" ColumnName="HighestDegree" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1574,6 +1698,7 @@
                 <ScalarProperty Name="FunctionalArea" ColumnName="FunctionalArea" />
                 <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
                 <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
+                <ScalarProperty Name="YearsExperience" ColumnName="YearsExperience" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1645,6 +1770,15 @@
                 <ScalarProperty Name="DegreeLevel" ColumnName="DegreeLevel" />
                 <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
                 <ScalarProperty Name="ResultStatus" ColumnName="ResultStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateSavedJobs">
+            <EntityTypeMapping TypeName="ProRecruit.CandidateSavedJob">
+              <MappingFragment StoreEntitySet="CandidateSavedJobs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
